@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:5173\" -UseBasicParsing -TimeoutSec 5; \"Status: $\\($r.StatusCode\\)\"; \"Title: $\\(\\(\\($r.Content -split '<title>'\\)[1] -split '</title>'\\)[0]\\)\" } catch { \"Erro: $_\" })"
+    ]
+  }
+}
