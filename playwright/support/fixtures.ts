@@ -1,14 +1,17 @@
-import { test as base, expect } from "@playwright/test";
-import { OrderLockupPage } from "./pages/OrderLockupPage";
+import { test as base } from "@playwright/test"
+import { createOrderLookupActions } from "./actions/orderLookupActions"
 
-type Fixtures = {
-  orderLockupPage: OrderLockupPage;
-};
+type App = {
+  orderLookup: ReturnType<typeof createOrderLookupActions>
+}
 
-export const test = base.extend<Fixtures>({
-  orderLockupPage: async ({ page }, use) => {
-    await use(new OrderLockupPage(page));
+export const test = base.extend<{ app: App }>({
+  app: async ({ page }, use) => {
+    const app: App = {
+      orderLookup: createOrderLookupActions(page),
+    }
+    await use(app)
   },
-});
+})
 
-export { expect };
+export { expect } from "@playwright/test"
