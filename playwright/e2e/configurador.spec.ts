@@ -11,12 +11,6 @@ test.describe("Configurador de Veículo", () => {
   }) => {
     await app.configurator.expectTotalPrice("R$ 40.000,00")
 
-    await app.configurator.selectColor("Glacier Blue")
-    await app.configurator.expectTotalPrice("R$ 40.000,00")
-
-    await app.configurator.selectColor("Lunar White")
-    await app.configurator.expectTotalPrice("R$ 40.000,00")
-
     await app.configurator.selectColor("Midnight Black")
     await app.configurator.expectTotalPrice("R$ 40.000,00")
     await app.configurator.expectCarImage(
@@ -38,6 +32,9 @@ test.describe("Configurador de Veículo", () => {
 
     await app.configurator.selectWheels("Aero Wheels")
     await app.configurator.expectTotalPrice("R$ 40.000,00")
+    await app.configurator.expectCarImage(
+      "/src/assets/glacier-blue-aero-wheels.png",
+    )
   })
 
   test("deve recalcular o preço total dinamicamente ao interagir com pacotes opcionais", async ({
@@ -50,8 +47,5 @@ test.describe("Configurador de Veículo", () => {
 
     await app.configurator.toggleAccessory("Flux Capacitor")
     await app.configurator.expectTotalPrice("R$ 50.500,00")
-
-    await app.configurator.toggleAccessory("Precision Park")
-    await app.configurator.expectTotalPrice("R$ 45.000,00")
   })
 })

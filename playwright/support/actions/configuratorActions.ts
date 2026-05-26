@@ -11,11 +11,9 @@ export function createConfiguratorActions(page: Page) {
   const precisionPark = page.getByRole("checkbox", { name: /Precision Park/ })
   const fluxCapacitor = page.getByRole("checkbox", { name: /Flux Capacitor/ })
 
-  const carImage = page.locator("img[alt^='Velô Sprint']")
-
-  const glacierBlueColor = page.getByTestId("color-option-glacier-blue")
-  const midnightBlackColor = page.getByTestId("color-option-midnight-black")
-  const lunarWhiteColor = page.getByTestId("color-option-lunar-white")
+  const glacierBlueColor = page.getByTestId("glacier-blue")
+  const midnightBlackColor = page.getByTestId("midnight-black")
+  const lunarWhiteColor = page.getByTestId("lunar-white")
 
   return {
     elements: {
@@ -24,7 +22,6 @@ export function createConfiguratorActions(page: Page) {
       sportWheels,
       precisionPark,
       fluxCapacitor,
-      carImage,
       glacierBlueColor,
       midnightBlackColor,
       lunarWhiteColor,
@@ -62,10 +59,13 @@ export function createConfiguratorActions(page: Page) {
     },
 
     async expectTotalPrice(price: string) {
-      await expect(totalSummary).toContainText(price)
+      const priceElement = page.getByTestId("total-price")
+      await expect(priceElement).toBeVisible()
+      await expect(priceElement).toHaveText(price)
     },
 
     async expectCarImage(src: string) {
+      const carImage = page.locator("img[alt^='Velô Sprint']")
       await expect(carImage).toHaveAttribute("src", src)
     },
   }
