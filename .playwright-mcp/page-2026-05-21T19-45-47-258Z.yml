@@ -1,0 +1,28 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - link "Velô" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Velô" [ref=e8]
+        - navigation [ref=e9]:
+          - link "Consultar Pedido" [ref=e10] [cursor=pointer]:
+            - /url: /lookup
+          - link "Configure o Seu" [ref=e11] [cursor=pointer]:
+            - /url: /configure
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - img [ref=e16]
+        - heading "Consultar Pedido" [level=3] [ref=e19]
+        - paragraph [ref=e20]: Digite o número do seu pedido para verificar o status
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - text: Número do Pedido
+          - textbox "Número do Pedido" [ref=e24]:
+            - /placeholder: "Ex: VLO-ABC123"
+        - button "Buscar Pedido" [disabled]:
+          - img
+          - text: Buscar Pedido
