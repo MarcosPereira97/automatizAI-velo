@@ -1,72 +1,63 @@
 import { Page, expect } from "@playwright/test"
 
-export type VehicleColor = "Glacier Blue" | "Midnight Black" | "Lunar White"
-export type VehicleWheels = "Aero Wheels" | "Sport Wheels"
-export type VehicleAccessory = "Precision Park" | "Flux Capacitor"
+export type ExteriorColorLabel =
+  | "Glacier Blue"
+  | "Midnight Black"
+  | "Lunar White"
+
+export type WheelLabel = "Aero Wheels" | "Sport Wheels"
+
+export type OptionalLabel = "Precision Park" | "Flux Capacitor"
+
+/** Valid image src fragments: every combination of color slug + wheel slug */
+export type CarImageSrc =
+  | "glacier-blue-aero-wheels"
+  | "glacier-blue-sport-wheels"
+  | "midnight-black-aero-wheels"
+  | "midnight-black-sport-wheels"
+  | "lunar-white-aero-wheels"
+  | "lunar-white-sport-wheels"
 
 export function createConfiguratorActions(page: Page) {
-  const totalSummary = page.getByText("Preço de Venda").locator("..")
-  const aeroWheels = page.getByRole("button", { name: /Aero Wheels/ })
-  const sportWheels = page.getByRole("button", { name: /Sport Wheels/ })
-  const precisionPark = page.getByRole("checkbox", { name: /Precision Park/ })
-  const fluxCapacitor = page.getByRole("checkbox", { name: /Flux Capacitor/ })
-
-  const glacierBlueColor = page.getByTestId("glacier-blue")
-  const midnightBlackColor = page.getByTestId("midnight-black")
-  const lunarWhiteColor = page.getByTestId("lunar-white")
+  const optionalCheckbox = (name: OptionalLabel | RegExp) =>
+    page.getByRole("checkbox", { name })
 
   return {
-    elements: {
-      totalSummary,
-      aeroWheels,
-      sportWheels,
-      precisionPark,
-      fluxCapacitor,
-      glacierBlueColor,
-      midnightBlackColor,
-      lunarWhiteColor,
-    },
-
     async open() {
       await page.goto("/configure")
-      await expect(
-        page.getByRole("heading", { name: "Velô Sprint", level: 1 }),
-      ).toBeVisible()
     },
 
-    async resetToBasePrice() {
-      if (await fluxCapacitor.isChecked()) {
-        await fluxCapacitor.click()
-      }
-      if (await precisionPark.isChecked()) {
-        await precisionPark.click()
-      }
-      await aeroWheels.click()
-      await expect(totalSummary).toContainText("R$ 40.000,00")
+    async selectColor(name: ExteriorColorLabel) {
+      await page.getByRole("button", { name }).click()
     },
 
-    async selectColor(color: VehicleColor) {
-      const colorId = color.toLowerCase().replace(" ", "-")
-      await page.getByTestId(`color-option-${colorId}`).click()
+    async selectWheels(name: WheelLabel | RegExp) {
+      await page.getByRole("button", { name }).click()
     },
 
-    async selectWheels(wheels: VehicleWheels) {
-      await page.getByRole("button", { name: new RegExp(wheels) }).click()
-    },
-
-    async toggleAccessory(accessory: VehicleAccessory) {
-      await page.getByRole("checkbox", { name: new RegExp(accessory) }).click()
-    },
-
-    async expectTotalPrice(price: string) {
+    async expectPrice(price: string) {
       const priceElement = page.getByTestId("total-price")
       await expect(priceElement).toBeVisible()
       await expect(priceElement).toHaveText(price)
     },
 
-    async expectCarImage(src: string) {
-      const carImage = page.locator("img[alt^='Velô Sprint']")
-      await expect(carImage).toHaveAttribute("src", src)
+    async expectCarImageSrc(src: CarImageSrc) {
+      const carImage = page.locator('img[alt^="Velô Sprint"]')
+      await expect(carImage).toHaveAttribute("src", new RegExp(src))
+    },
+
+    async checkOptional(name: OptionalLabel | RegExp) {
+      await expect(optionalCheckbox(name)).toBeVisible()
+      await optionalCheckbox(name).check()
+    },
+
+    async uncheckOptional(name: OptionalLabel | RegExp) {
+      await expect(optionalCheckbox(name)).toBeVisible()
+      await optionalCheckbox(name).uncheck()
+    },
+
+    async finishConfigurator() {
+      await page.getByRole("button", { name: "Monte o Seu" }).click()
     },
   }
 }
