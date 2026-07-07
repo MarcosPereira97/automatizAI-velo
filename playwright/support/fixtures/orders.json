@@ -1,0 +1,47 @@
+{
+  "orderApproved": {
+    "number": "VLO-SE4R01",
+    "status": "APROVADO",
+    "color": "Lunar White",
+    "wheels": "sport Wheels",
+    "interior": "cream",
+    "customer": {
+      "name": "Marcos Jr",
+      "email": "qa@yopmail.com",
+      "document": "123.456.789.00",
+      "phone": "(11) 99999-9999"
+    },
+    "payment": "À Vista",
+    "total_price": "40000"
+  },
+  "orderReproved": {
+    "number": "VLO-SE4R02",
+    "status": "REPROVADO",
+    "color": "Midnight Black",
+    "wheels": "aero Wheels",
+    "interior": "cream",
+    "customer": {
+      "name": "Henrique Pereira",
+      "email": "henrique@yopmail.com",
+      "document": "123.456.789.00",
+      "phone": "(11) 99999-9999"
+    },
+    "payment": "À Vista",
+    "total_price": "40000"
+  },
+  "orderInAnalysis": {
+    "number": "VLO-SE4R03",
+    "status": "EM_ANALISE",
+    "color": "Glacier Blue",
+    "wheels": "sport Wheels",
+    "interior": "cream",
+    "customer": {
+      "name": "Marcos Jr",
+      "email": "marcos@jr.com.br",
+      "document": "123.456.789.00",
+      "phone": "(11) 99999-9999"
+    },
+    "payment": "À Vista",
+    "total_price": "40000"
+  }
+}

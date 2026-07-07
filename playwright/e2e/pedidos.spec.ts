@@ -1,64 +1,46 @@
 import { expect, test } from "../support/fixtures"
 import { generateOrderCode } from "../support/helpers"
 import { OrderDetails } from "../support/actions/orderLookupActions"
+import {
+  insertOrder,
+  deleteOrderByNumber,
+} from "../support/database/orderRepository"
+
+import dataTest from "../support/fixtures/orders.json" with { type: "json" }
+
+const orderApproved = dataTest.orderApproved as OrderDetails
+const orderReproved = dataTest.orderReproved as OrderDetails
+const orderInAnalysis = dataTest.orderInAnalysis as OrderDetails
 
 test.describe("Consulta de Pedido", () => {
+  test.beforeAll(async () => {
+    await deleteOrderByNumber(orderApproved.number)
+    await insertOrder(orderApproved)
+
+    await deleteOrderByNumber(orderReproved.number)
+    await insertOrder(orderReproved)
+
+    await deleteOrderByNumber(orderInAnalysis.number)
+    await insertOrder(orderInAnalysis)
+  })
+
   test.beforeEach(async ({ app }) => {
     await app.orderLookup.open()
   })
 
   test("deve consultar um pedido aprovado", async ({ app }) => {
-    const order: OrderDetails = {
-      number: "VLO-MA7H4Y",
-      status: "APROVADO",
-      color: "Lunar White",
-      wheels: "sport Wheels",
-      interior: "cream",
-      customer: {
-        name: "Marcos Jr",
-        email: "qa@yopmail.com",
-      },
-      payment: "À Vista",
-    }
-
-    await app.orderLookup.searchOrder(order.number)
-    await app.orderLookup.validateOrderDetails(order)
+    await app.orderLookup.searchOrder(orderApproved.number)
+    await app.orderLookup.validateOrderDetails(orderApproved)
   })
 
   test("deve consultar um pedido reprovado", async ({ app }) => {
-    const order: OrderDetails = {
-      number: "VLO-43M9X7",
-      status: "REPROVADO",
-      color: "Midnight Black",
-      wheels: "aero Wheels",
-      interior: "cream",
-      customer: {
-        name: "Henrique Pereira",
-        email: "henrique@yopmail.com",
-      },
-      payment: "À Vista",
-    }
-
-    await app.orderLookup.searchOrder(order.number)
-    await app.orderLookup.validateOrderDetails(order)
+    await app.orderLookup.searchOrder(orderReproved.number)
+    await app.orderLookup.validateOrderDetails(orderReproved)
   })
 
   test("deve consultar um pedido em analise", async ({ app }) => {
-    const order: OrderDetails = {
-      number: "VLO-VWH8SR",
-      status: "EM_ANALISE",
-      color: "Glacier Blue",
-      wheels: "sport Wheels",
-      interior: "cream",
-      customer: {
-        name: "Marcos Jr",
-        email: "marcos@jr.com.br",
-      },
-      payment: "À Vista",
-    }
-
-    await app.orderLookup.searchOrder(order.number)
-    await app.orderLookup.validateOrderDetails(order)
+    await app.orderLookup.searchOrder(orderInAnalysis.number)
+    await app.orderLookup.validateOrderDetails(orderInAnalysis)
   })
 
   test("deve exibir mensagem quando o pedido não é encontrado", async ({
