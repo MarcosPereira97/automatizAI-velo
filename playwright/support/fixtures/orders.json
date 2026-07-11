@@ -6,13 +6,15 @@
     "wheels": "sport Wheels",
     "interior": "cream",
     "customer": {
-      "name": "Marcos Jr",
+      "name": "Marcos",
+      "lastname": "Henrique",
       "email": "qa@yopmail.com",
       "document": "123.456.789.00",
       "phone": "(11) 99999-9999"
     },
     "payment": "À Vista",
-    "total_price": "40000"
+    "total_price": "40000",
+    "store": "Velô Paulista"
   },
   "orderReproved": {
     "number": "VLO-SE4R02",
@@ -21,8 +23,9 @@
     "wheels": "aero Wheels",
     "interior": "cream",
     "customer": {
-      "name": "Henrique Pereira",
-      "email": "henrique@yopmail.com",
+      "name": "Marcos",
+      "lastname": "Henrique",
+      "email": "qa@yopmail.com",
       "document": "123.456.789.00",
       "phone": "(11) 99999-9999"
     },
@@ -36,8 +39,9 @@
     "wheels": "sport Wheels",
     "interior": "cream",
     "customer": {
-      "name": "Marcos Jr",
-      "email": "marcos@jr.com.br",
+      "name": "Marcos",
+      "lastname": "Henrique",
+      "email": "qa@yopmail.com",
       "document": "123.456.789.00",
       "phone": "(11) 99999-9999"
     },

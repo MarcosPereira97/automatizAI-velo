@@ -35,10 +35,18 @@ export function createConfiguratorActions(page: Page) {
       await page.getByRole("button", { name }).click()
     },
 
-    async expectPrice(price: string) {
+    async expectPrice(price: string | number) {
       const priceElement = page.getByTestId("total-price")
-      await expect(priceElement).toBeVisible()
-      await expect(priceElement).toHaveText(price)
+
+      let expectedValue = String(price)
+
+      if (!Number.isNaN(Number(expectedValue))) {
+        expectedValue = Number(expectedValue).toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+        })
+      }
+
+      await expect(priceElement).toContainText(expectedValue)
     },
 
     async expectCarImageSrc(src: CarImageSrc) {

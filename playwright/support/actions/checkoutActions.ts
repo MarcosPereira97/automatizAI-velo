@@ -32,15 +32,16 @@ export function createCheckoutActions(page: Page) {
     async fillCustomerlData(data: {
       name: string
       lastname: string
-      email: string
+      email?: string
       phone: string
-      document: string
+      document?: string
     }) {
       await page.getByTestId("checkout-name").fill(data.name)
       await page.getByTestId("checkout-lastname").fill(data.lastname)
-      await page.getByTestId("checkout-email").fill(data.email)
+      if (data.email) await page.getByTestId("checkout-email").fill(data.email)
       await page.getByTestId("checkout-phone").fill(data.phone)
-      await page.getByTestId("checkout-document").fill(data.document)
+      if (data.document)
+        await page.getByTestId("checkout-document").fill(data.document)
     },
 
     async selectStore(storeName: string) {
