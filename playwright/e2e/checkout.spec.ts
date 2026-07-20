@@ -44,7 +44,7 @@ test.describe("Checkout", () => {
       const customer = {
         name: "A",
         lastname: "B",
-        email: "marcos@teste.com",
+        email: "qa@velo.com",
         document: "00000014141",
         phone: "(11) 99999-9999",
       }
@@ -92,7 +92,7 @@ test.describe("Checkout", () => {
       const customer = {
         name: "Marcos",
         lastname: "Henrique",
-        email: "marcos@teste.com",
+        email: "qa@velo.com",
         phone: "(11) 99999-9999",
       }
 
@@ -126,7 +126,7 @@ test.describe("Checkout", () => {
   })
 
   test.describe("Pagamento e Confirmação", () => {
-    test("deve finalizar o pedido com pagamento à vista com sucesso (CT05)", async ({
+    test("deve finalizar o pedido com pagamento à vista com sucesso", async ({
       page,
       app,
     }) => {
@@ -150,6 +150,98 @@ test.describe("Checkout", () => {
 
       // Assert
       await app.checkout.expectResult("Pedido Aprovado!")
+    })
+
+    test("deve aprovar automaticamente o crédito quando o score do CPF for maior que 700 no financiamento.", async ({
+      page,
+      app,
+    }) => {
+      await deleteOrderByEmail(
+        dataTest.orderApprovedFinanciamento.customer.email,
+      )
+
+      await page.route("**functions/v1/credit-analysis", (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            status: "Done",
+            score: 701,
+          }),
+        }),
+      )
+
+      // Arrange
+      await page.goto("/")
+      await page.getByTestId("hero-cta-primary").click()
+
+      await app.configurator.expectPrice(
+        dataTest.orderApprovedFinanciamento.total_price,
+      )
+      await app.configurator.finishConfigurator()
+
+      await app.checkout.expectLoaded()
+      await app.checkout.fillCustomerlData(
+        dataTest.orderApprovedFinanciamento.customer,
+      )
+      await app.checkout.selectStore(dataTest.orderApprovedFinanciamento.store)
+
+      // Act
+      await app.checkout.selectPaymentMethod(
+        dataTest.orderApprovedFinanciamento.payment,
+      )
+      await app.checkout.acceptTerms()
+      await app.checkout.submit()
+
+      // Assert
+      await app.checkout.expectResult("Pedido Aprovado!")
+    })
+
+    test("deve colocar o pedido em análise quando o score do CPF for entre 501 e 700 no financiamento.", async ({
+      page,
+      app,
+    }) => {
+      const customer = {
+        ...dataTest.orderApprovedFinanciamento.customer,
+        email: "qa_analise@velo.com",
+        document: "162.304.462-60",
+      }
+
+      await deleteOrderByEmail(customer.email)
+
+      await page.route("**functions/v1/credit-analysis", (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            status: "Done",
+            score: 600,
+          }),
+        }),
+      )
+
+      // Arrange
+      await page.goto("/")
+      await page.getByTestId("hero-cta-primary").click()
+
+      await app.configurator.expectPrice(
+        dataTest.orderApprovedFinanciamento.total_price,
+      )
+      await app.configurator.finishConfigurator()
+
+      await app.checkout.expectLoaded()
+      await app.checkout.fillCustomerlData(customer)
+      await app.checkout.selectStore(dataTest.orderApprovedFinanciamento.store)
+
+      // Act
+      await app.checkout.selectPaymentMethod(
+        dataTest.orderApprovedFinanciamento.payment,
+      )
+      await app.checkout.acceptTerms()
+      await app.checkout.submit()
+
+      // Assert
+      await app.checkout.expectResult("Pedido em Análise")
     })
   })
 })
