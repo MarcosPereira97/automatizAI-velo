@@ -79,23 +79,7 @@ export function createCheckoutActions(page: Page) {
       await this.submit()
     },
 
-    async mockCreditScore(score: number) {
-      await page.route("**functions/v1/credit-analysis", (route) =>
-        route.fulfill({
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify({
-            status: "Done",
-            score,
-          }),
-        }),
-      )
-    },
-
     async setupCartFromHome(price: string, configurator: any) {
-      await page.goto("/")
-      await page.getByTestId("hero-cta-primary").click()
-
       await configurator.expectPrice(price)
       await configurator.finishConfigurator()
 

@@ -126,6 +126,10 @@ test.describe("Checkout", () => {
   })
 
   test.describe("Pagamento e Confirmação", () => {
+    test.beforeEach(async ({ app }) => {
+      await app.hero.open()
+    })
+
     test("deve finalizar o pedido com pagamento à vista com sucesso", async ({
       app,
     }) => {
@@ -152,7 +156,7 @@ test.describe("Checkout", () => {
       await deleteOrderByEmail(
         dataTest.orderApprovedFinanciamento.customer.email,
       )
-      await app.checkout.mockCreditScore(701)
+      await app.mock.creditAnalysis(710)
 
       // Arrange
       await app.checkout.setupCartFromHome(
@@ -183,7 +187,7 @@ test.describe("Checkout", () => {
       }
 
       await deleteOrderByEmail(customer.email)
-      await app.checkout.mockCreditScore(600)
+      await app.mock.creditAnalysis(600)
 
       // Arrange
       await app.checkout.setupCartFromHome(
@@ -212,7 +216,7 @@ test.describe("Checkout", () => {
       }
 
       await deleteOrderByEmail(customer.email)
-      await app.checkout.mockCreditScore(500)
+      await app.mock.creditAnalysis(500)
 
       // Arrange
       await app.checkout.setupCartFromHome(
@@ -228,7 +232,7 @@ test.describe("Checkout", () => {
       )
 
       // Assert
-      await app.checkout.expectResult("Crédito Reprovado")
+      await app.checkout.expectResult("Pedido Reprovado!")
     })
 
     test("deve reprovar o crédito quando o score do CPF for menor ou igual a 500 no financiamento com entrada inferior a 50%.", async ({
@@ -242,7 +246,7 @@ test.describe("Checkout", () => {
       }
 
       await deleteOrderByEmail(customer.email)
-      await app.checkout.mockCreditScore(500)
+      await app.mock.creditAnalysis(500)
 
       // Arrange
       await app.checkout.setupCartFromHome(
@@ -259,7 +263,7 @@ test.describe("Checkout", () => {
       )
 
       // Assert
-      await app.checkout.expectResult("Crédito Reprovado")
+      await app.checkout.expectResult("Pedido Reprovado!")
     })
 
     test("deve aprovar o crédito quando o score do CPF for menor ou igual a 500 no financiamento com entrada igual a 50%.", async ({
@@ -273,7 +277,7 @@ test.describe("Checkout", () => {
       }
 
       await deleteOrderByEmail(customer.email)
-      await app.checkout.mockCreditScore(450)
+      await app.mock.creditAnalysis(450)
 
       // Arrange
       await app.checkout.setupCartFromHome(
@@ -304,9 +308,10 @@ test.describe("Checkout", () => {
       }
 
       await deleteOrderByEmail(customer.email)
-      await app.checkout.mockCreditScore(300)
+      await app.mock.creditAnalysis(300)
 
       // Arrange
+
       await app.checkout.setupCartFromHome(
         dataTest.orderApprovedFinanciamento.total_price,
         app.configurator,

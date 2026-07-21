@@ -65,7 +65,7 @@ const Success = () => {
         return {
           icon: <XCircle className="w-12 h-12 text-destructive" />,
           iconBg: 'bg-destructive/10',
-          title: 'Crédito Reprovado',
+          title: 'Pedido Reprovado!',
           titleColor: 'text-destructive',
           description: 'Infelizmente seu crédito não foi aprovado. Tente novamente com pagamento à vista.',
         };
