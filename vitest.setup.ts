@@ -8,3 +8,7 @@ const localStorageMock = {
 }
 
 vi.stubGlobal("localStorage", localStorageMock)
+
+// Mock das variáveis de ambiente obrigatórias
+vi.stubEnv("VITE_SUPABASE_URL", "https://mock.supabase.co")
+vi.stubEnv("VITE_SUPABASE_PUBLISHABLE_KEY", "mock-key")
