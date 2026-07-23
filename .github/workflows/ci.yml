@@ -12,7 +12,9 @@ on:
 env:
   NODE_VERSION: "24"
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_SCOPE: "marcospereira97s-projects"
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_SCOPE: ${{secrets.VERCEL_SCOPE}}
 
 jobs:
   unit-tests:
@@ -61,6 +63,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
+
+      - name: Pull Vercel Environment Information
+        run: yarn vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
 
       - name: Build Vercel
         run: yarn vercel build --token=$VERCEL_TOKEN
