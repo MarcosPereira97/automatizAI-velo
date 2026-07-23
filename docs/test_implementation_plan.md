@@ -12,9 +12,11 @@ Como o projeto utiliza o Vite, a ferramenta mais adequada e recomendada para tes
 ## Proposed Changes
 
 ### Dependências e Configuração
+
 Iremos adicionar o Vitest ao projeto para permitir a execução dos testes.
 
 #### [MODIFY] package.json
+
 - Adicionar `"vitest"` nas `devDependencies`.
 - Adicionar o script `"test": "vitest"` na seção de `scripts`.
 
@@ -25,16 +27,19 @@ Iremos adicionar o Vitest ao projeto para permitir a execução dos testes.
 Criaremos um novo arquivo de testes focado nas funções de cálculo e formatação de preço, que são lógicas de negócio puras (sem dependências externas) presentes na store.
 
 #### [NEW] src/store/configuratorStore.test.ts
+
 Este arquivo conterá testes básicos para as seguintes funções exportadas pelo `configuratorStore.ts`:
+
 - `calculateTotalPrice`: Testar o cálculo base e a adição de opcionais e rodas.
 - `calculateInstallment`: Testar o cálculo de parcelamento com juros.
 - `formatPrice`: Testar a formatação correta para a moeda brasileira (BRL).
 
-*Obs: Testes do estado global do Zustand (`useConfiguratorStore`) não serão incluídos nesta etapa inicial para manter a simplicidade, mas a estrutura já deixará tudo pronto para que possam ser adicionados no futuro.*
+_Obs: Testes do estado global do Zustand (`useConfiguratorStore`) não serão incluídos nesta etapa inicial para manter a simplicidade, mas a estrutura já deixará tudo pronto para que possam ser adicionados no futuro._
 
 ## Verification Plan
 
 ### Automated Tests
+
 1. Executar o comando para instalar a nova dependência: `npm install` (ou `npm install -D vitest`).
 2. Executar os testes: `npm run test` (ou `npx vitest run`).
 3. Verificar se todos os testes básicos de funções passaram com sucesso no terminal.

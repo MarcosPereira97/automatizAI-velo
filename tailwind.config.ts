@@ -1,8 +1,13 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -14,8 +19,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Outfit', 'sans-serif'],
-        body: ['system-ui', '-apple-system', 'sans-serif'],
+        display: ["Outfit", "sans-serif"],
+        body: ["system-ui", "-apple-system", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -86,9 +91,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'elegant': 'var(--shadow-md)',
-        'elegant-lg': 'var(--shadow-lg)',
-        'elegant-xl': 'var(--shadow-xl)',
+        elegant: "var(--shadow-md)",
+        "elegant-lg": "var(--shadow-lg)",
+        "elegant-xl": "var(--shadow-xl)",
       },
       keyframes: {
         "accordion-down": {
@@ -127,4 +132,4 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+} satisfies Config

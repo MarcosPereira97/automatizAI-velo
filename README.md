@@ -5,6 +5,7 @@ Aplicação web em React para configuração e compra do veículo elétrico **Ve
 ## Sobre o Projeto
 
 Uma SPA (Single Page Application) que permite:
+
 - Personalizar cores, rodas e opcionais do veículo
 - Calcular preços em tempo real
 - Realizar pedidos com análise de crédito
@@ -16,13 +17,13 @@ Uma SPA (Single Page Application) que permite:
 
 ## Stack Tecnológica
 
-| Categoria | Tecnologias |
-|-----------|-------------|
-| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui |
-| **Estado** | Zustand (global), React Hook Form (formulários) |
-| **Validação** | Zod |
-| **Data Fetching** | TanStack Query |
-| **Backend** | Supabase (PostgreSQL + Edge Functions) |
+| Categoria         | Tecnologias                                         |
+| ----------------- | --------------------------------------------------- |
+| **Frontend**      | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui |
+| **Estado**        | Zustand (global), React Hook Form (formulários)     |
+| **Validação**     | Zod                                                 |
+| **Data Fetching** | TanStack Query                                      |
+| **Backend**       | Supabase (PostgreSQL + Edge Functions)              |
 
 ---
 
@@ -100,13 +101,13 @@ src/
 
 ## Rotas
 
-| Rota | Descrição |
-|------|-----------|
-| `/` | Landing page |
+| Rota         | Descrição               |
+| ------------ | ----------------------- |
+| `/`          | Landing page            |
 | `/configure` | Configurador do veículo |
-| `/order` | Checkout/Pedido |
-| `/success` | Confirmação do pedido |
-| `/lookup` | Consulta de pedidos |
+| `/order`     | Checkout/Pedido         |
+| `/success`   | Confirmação do pedido   |
+| `/lookup`    | Consulta de pedidos     |
 
 ---
 
@@ -123,6 +124,7 @@ src/
 ## Banco de Dados
 
 **Tabela `orders`** — campos principais:
+
 - `order_number` — Formato: VLO-XXXXXX
 - `color`, `wheel_type`, `optionals` — Configuração
 - `customer_name`, `customer_email`, `customer_cpf` — Cliente
@@ -133,13 +135,13 @@ src/
 
 ## Análise de Crédito
 
-| Score | Resultado |
-|-------|-----------|
-| > 700 | Aprovado |
+| Score   | Resultado  |
+| ------- | ---------- |
+| > 700   | Aprovado   |
 | 501-700 | Em análise |
-| ≤ 500 | Reprovado |
+| ≤ 500   | Reprovado  |
 
-*Se entrada ≥ 50% do total, aprova mesmo com score < 700*
+_Se entrada ≥ 50% do total, aprova mesmo com score < 700_
 
 ---
 

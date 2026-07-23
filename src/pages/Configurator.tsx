@@ -1,5 +1,5 @@
-import { CarStage } from '@/components/configurator/CarStage';
-import { ConfigPanel } from '@/components/configurator/ConfigPanel';
+import { CarStage } from "@/components/configurator/CarStage"
+import { ConfigPanel } from "@/components/configurator/ConfigPanel"
 
 const Configurator = () => {
   return (
@@ -14,7 +14,7 @@ const Configurator = () => {
         <ConfigPanel />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Configurator;
+export default Configurator

@@ -1,78 +1,86 @@
-import { useLocation, useNavigate, Navigate, Link } from 'react-router-dom';
-import { CheckCircle, XCircle, Clock } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Order, formatPrice, ExteriorColor, WheelType } from '@/store/configuratorStore';
+import { useLocation, useNavigate, Navigate, Link } from "react-router-dom"
+import { CheckCircle, XCircle, Clock } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import {
+  Order,
+  formatPrice,
+  ExteriorColor,
+  WheelType,
+} from "@/store/configuratorStore"
 
-import logo from '@/assets/brand.svg';
-import glacierBlueAero from '@/assets/glacier-blue-aero-wheels.png';
-import glacierBlueSport from '@/assets/glacier-blue-sport-wheels.png';
-import lunarWhiteAero from '@/assets/lunar-white-aero-wheels.png';
-import lunarWhiteSport from '@/assets/lunar-white-sport-wheels.png';
-import midnightBlackAero from '@/assets/midnight-black-aero-wheels.png';
-import midnightBlackSport from '@/assets/midnight-black-sport-wheels.png';
+import logo from "@/assets/brand.svg"
+import glacierBlueAero from "@/assets/glacier-blue-aero-wheels.png"
+import glacierBlueSport from "@/assets/glacier-blue-sport-wheels.png"
+import lunarWhiteAero from "@/assets/lunar-white-aero-wheels.png"
+import lunarWhiteSport from "@/assets/lunar-white-sport-wheels.png"
+import midnightBlackAero from "@/assets/midnight-black-aero-wheels.png"
+import midnightBlackSport from "@/assets/midnight-black-sport-wheels.png"
 
 const exteriorImages: Record<ExteriorColor, Record<WheelType, string>> = {
-  'glacier-blue': {
+  "glacier-blue": {
     aero: glacierBlueAero,
     sport: glacierBlueSport,
   },
-  'lunar-white': {
+  "lunar-white": {
     aero: lunarWhiteAero,
     sport: lunarWhiteSport,
   },
-  'midnight-black': {
+  "midnight-black": {
     aero: midnightBlackAero,
     sport: midnightBlackSport,
   },
-};
+}
 
 const colorLabels: Record<ExteriorColor, string> = {
-  'glacier-blue': 'Glacier Blue',
-  'lunar-white': 'Lunar White',
-  'midnight-black': 'Midnight Black',
-};
+  "glacier-blue": "Glacier Blue",
+  "lunar-white": "Lunar White",
+  "midnight-black": "Midnight Black",
+}
 
 const Success = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const order = location.state?.order as Order | undefined;
+  const location = useLocation()
+  const navigate = useNavigate()
+  const order = location.state?.order as Order | undefined
 
   if (!order) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />
   }
 
   const getStatusDetails = () => {
     switch (order.status) {
-      case 'APROVADO':
+      case "APROVADO":
         return {
           icon: <CheckCircle className="w-12 h-12 text-success" />,
-          iconBg: 'bg-success/10',
-          title: 'Pedido Aprovado!',
-          titleColor: 'text-success',
-          description: 'Seu pedido foi processado com sucesso. Em breve entraremos em contato.',
-        };
-      case 'EM_ANALISE':
+          iconBg: "bg-success/10",
+          title: "Pedido Aprovado!",
+          titleColor: "text-success",
+          description:
+            "Seu pedido foi processado com sucesso. Em breve entraremos em contato.",
+        }
+      case "EM_ANALISE":
         return {
           icon: <Clock className="w-12 h-12 text-warning" />,
-          iconBg: 'bg-warning/10',
-          title: 'Pedido em Análise',
-          titleColor: 'text-warning',
-          description: 'Seu pedido de crédito está em análise manual. Aguarde nosso retorno em breve.',
-        };
-      case 'REPROVADO':
+          iconBg: "bg-warning/10",
+          title: "Pedido em Análise",
+          titleColor: "text-warning",
+          description:
+            "Seu pedido de crédito está em análise manual. Aguarde nosso retorno em breve.",
+        }
+      case "REPROVADO":
       default:
         return {
           icon: <XCircle className="w-12 h-12 text-destructive" />,
-          iconBg: 'bg-destructive/10',
-          title: 'Pedido Reprovado!',
-          titleColor: 'text-destructive',
-          description: 'Infelizmente seu crédito não foi aprovado. Tente novamente com pagamento à vista.',
-        };
+          iconBg: "bg-destructive/10",
+          title: "Pedido Reprovado!",
+          titleColor: "text-destructive",
+          description:
+            "Infelizmente seu crédito não foi aprovado. Tente novamente com pagamento à vista.",
+        }
     }
-  };
+  }
 
-  const statusDetails = getStatusDetails();
+  const statusDetails = getStatusDetails()
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
@@ -80,11 +88,16 @@ const Success = () => {
       <Link to="/" className="mb-8">
         <img src={logo} alt="Velô" className="h-8" />
       </Link>
-      
+
       <div className="w-full max-w-2xl bg-card rounded-lg shadow-elegant-lg p-8 animate-scale-in">
         {/* Status Icon */}
         <div className="flex justify-center mb-6">
-          <div className={cn("w-20 h-20 rounded-full flex items-center justify-center", statusDetails.iconBg)}>
+          <div
+            className={cn(
+              "w-20 h-20 rounded-full flex items-center justify-center",
+              statusDetails.iconBg,
+            )}
+          >
             {statusDetails.icon}
           </div>
         </div>
@@ -94,15 +107,13 @@ const Success = () => {
           <h1
             data-testid="success-status"
             className={cn(
-              'font-display text-3xl font-bold mb-2',
-              statusDetails.titleColor
+              "font-display text-3xl font-bold mb-2",
+              statusDetails.titleColor,
             )}
           >
             {statusDetails.title}
           </h1>
-          <p className="text-muted-foreground">
-            {statusDetails.description}
-          </p>
+          <p className="text-muted-foreground">{statusDetails.description}</p>
         </div>
 
         {/* Order Summary */}
@@ -110,19 +121,27 @@ const Success = () => {
           <div className="flex gap-4 items-start">
             <div className="w-32 h-20 bg-stage rounded-lg overflow-hidden flex-shrink-0">
               <img
-                src={exteriorImages[order.configuration.exteriorColor][order.configuration.wheelType]}
+                src={
+                  exteriorImages[order.configuration.exteriorColor][
+                    order.configuration.wheelType
+                  ]
+                }
                 alt="Velô Sprint"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex-1">
-              <h3 className="font-display font-semibold text-lg">Velô Sprint</h3>
+              <h3 className="font-display font-semibold text-lg">
+                Velô Sprint
+              </h3>
               <p className="text-sm text-muted-foreground">
-                {colorLabels[order.configuration.exteriorColor]} • Interior {order.configuration.interiorColor.replace('-', ' ')} • {order.configuration.wheelType} wheels
+                {colorLabels[order.configuration.exteriorColor]} • Interior{" "}
+                {order.configuration.interiorColor.replace("-", " ")} •{" "}
+                {order.configuration.wheelType} wheels
               </p>
               <p className="mt-2 font-display font-semibold text-lg">
                 {formatPrice(order.totalPrice)}
-                {order.paymentMethod === 'financiamento' && (
+                {order.paymentMethod === "financiamento" && (
                   <span className="text-sm font-normal text-muted-foreground ml-2">
                     (12x de {formatPrice(order.installmentValue!)})
                   </span>
@@ -160,19 +179,23 @@ const Success = () => {
         <div className="flex gap-4">
           <Button
             variant="outline"
-            onClick={() => navigate('/lookup')}
+            onClick={() => navigate("/lookup")}
             className="flex-1"
             data-testid="goto-consultar"
           >
             Consultar Pedido
           </Button>
-          <Button onClick={() => navigate('/configure')} className="flex-1" data-testid="configure-another">
+          <Button
+            onClick={() => navigate("/configure")}
+            className="flex-1"
+            data-testid="configure-another"
+          >
             Configurar Outro
           </Button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Success;
+export default Success

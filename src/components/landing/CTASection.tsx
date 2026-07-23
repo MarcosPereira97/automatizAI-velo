@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import midnightBlackAero from "@/assets/midnight-black.png";
+import { Link } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import midnightBlackAero from "@/assets/midnight-black.png"
 
 const CTASection = () => {
   return (
@@ -24,20 +24,23 @@ const CTASection = () => {
               Pronto para o Futuro?
             </h2>
             <p className="text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0">
-              Configure seu Velô Sprint do seu jeito. Escolha cores, interiores 
+              Configure seu Velô Sprint do seu jeito. Escolha cores, interiores
               e rodas para criar o veículo perfeito para você.
             </p>
-            
+
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">
-                A partir de
-              </div>
+              <div className="text-sm text-muted-foreground">A partir de</div>
               <div className="text-4xl font-bold text-foreground">
                 R$ 40.000
               </div>
             </div>
 
-            <Button size="lg" asChild className="text-lg px-8" data-testid="cta-button">
+            <Button
+              size="lg"
+              asChild
+              className="text-lg px-8"
+              data-testid="cta-button"
+            >
               <Link to="/configure">
                 Monte o Seu Agora
                 <ArrowRight className="ml-2" size={20} />
@@ -47,7 +50,7 @@ const CTASection = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default CTASection;
+export default CTASection

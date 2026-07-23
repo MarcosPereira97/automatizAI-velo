@@ -97,20 +97,20 @@
 ### Estrutura de Teste
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test"
 
-test.describe('Funcionalidade X', () => {
-  test('deve realizar ação esperada', async ({ page }) => {
+test.describe("Funcionalidade X", () => {
+  test("deve realizar ação esperada", async ({ page }) => {
     // Arrange
-    await page.goto('/rota');
+    await page.goto("/rota")
 
     // Act
-    await page.getByRole('button', { name: 'Enviar' }).click();
+    await page.getByRole("button", { name: "Enviar" }).click()
 
     // Assert
-    await expect(page.getByRole('heading', { name: 'Sucesso' })).toBeVisible();
-  });
-});
+    await expect(page.getByRole("heading", { name: "Sucesso" })).toBeVisible()
+  })
+})
 ```
 
 ### Tipagem

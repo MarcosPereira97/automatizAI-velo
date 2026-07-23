@@ -1,12 +1,12 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test"
 
-import dotenv from "dotenv";
+import dotenv from "dotenv"
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-dotenv.config();
+dotenv.config()
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,7 +26,12 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://velo-marcospereira97.vercel.app",
+    baseURL:
+      "https://automatiz-ai-velo-1h5ggv4lf-marcospereira97s-projects.vercel.app",
+
+    extraHTTPHeaders: {
+      "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET || "",
+    },
 
     screenshot: "only-on-failure",
 
@@ -75,7 +80,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: "yarn dev",
-    url: "https://velo-marcospereira97.vercel.app",
+    url: "http://localhost:5173",
     reuseExistingServer: !process.env.CI,
   },
-});
+})

@@ -1,9 +1,7 @@
 import { Page, expect } from "@playwright/test"
 
 export type ExteriorColorLabel =
-  | "Glacier Blue"
-  | "Midnight Black"
-  | "Lunar White"
+  "Glacier Blue" | "Midnight Black" | "Lunar White"
 
 export type WheelLabel = "Aero Wheels" | "Sport Wheels"
 

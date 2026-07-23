@@ -75,30 +75,30 @@ Estabelecer a base do projeto com:
 export function createLoginActions(browser: WebdriverIO.Browser) {
   // helpers privados (primitivos)
   const fillEmail = (email: string) =>
-    browser.$("~LoginScreen.Form.EmailInput").setValue(email);
+    browser.$("~LoginScreen.Form.EmailInput").setValue(email)
   const fillSenha = (senha: string) =>
-    browser.$("~LoginScreen.Form.SenhaInput").setValue(senha);
-  const tapEntrar = () => browser.$("~LoginScreen.CTA.EntrarButton").click();
+    browser.$("~LoginScreen.Form.SenhaInput").setValue(senha)
+  const tapEntrar = () => browser.$("~LoginScreen.CTA.EntrarButton").click()
 
   return {
     // queries (getters lazy — avaliam o seletor só quando usados)
     get container() {
-      return browser.$("~LoginScreen.Container");
+      return browser.$("~LoginScreen.Container")
     },
     get errorMessage() {
-      return browser.$("~LoginScreen.Form.ErrorMessage");
+      return browser.$("~LoginScreen.Form.ErrorMessage")
     },
 
     // behaviors (comportamento de negócio)
     async waitForReady() {
-      await this.container.waitForDisplayed({ timeout: 5000 });
+      await this.container.waitForDisplayed({ timeout: 5000 })
     },
     async loginWith(email: string, senha: string) {
-      await fillEmail(email);
-      await fillSenha(senha);
-      await tapEntrar();
+      await fillEmail(email)
+      await fillSenha(senha)
+      await tapEntrar()
     },
-  };
+  }
 }
 ```
 
@@ -115,9 +115,9 @@ export function createLoginActions(browser: WebdriverIO.Browser) {
 
 ```ts
 // support/app.ts
-import { createAuthActions } from "./actions/authActions";
-import { createLoginActions } from "./actions/loginActions";
-import { createHomeActions } from "./actions/homeActions";
+import { createAuthActions } from "./actions/authActions"
+import { createLoginActions } from "./actions/loginActions"
+import { createHomeActions } from "./actions/homeActions"
 
 export function createApp(browser: WebdriverIO.Browser) {
   return {
@@ -127,40 +127,40 @@ export function createApp(browser: WebdriverIO.Browser) {
 
     // reset padrão entre testes
     async reset() {
-      await browser.terminateApp(process.env.APP_PACKAGE!);
-      await browser.activateApp(process.env.APP_PACKAGE!);
+      await browser.terminateApp(process.env.APP_PACKAGE!)
+      await browser.activateApp(process.env.APP_PACKAGE!)
     },
-  };
+  }
 }
 
-export type App = ReturnType<typeof createApp>;
+export type App = ReturnType<typeof createApp>
 ```
 
 ```ts
 // support/mocha-context.d.ts
-import type { App } from "./app";
+import type { App } from "./app"
 
 declare module "mocha" {
   interface Context {
-    app: App;
+    app: App
   }
 }
 ```
 
 ```ts
 // support/hooks.ts
-import { createApp } from "./app";
+import { createApp } from "./app"
 
 beforeEach(async function () {
-  this.app = createApp(browser);
-  await this.app.reset(); // isolamento por padrão
-});
+  this.app = createApp(browser)
+  await this.app.reset() // isolamento por padrão
+})
 
 afterEach(async function () {
   if (this.currentTest?.state === "failed") {
-    await captureFailureEvidence(this.currentTest);
+    await captureFailureEvidence(this.currentTest)
   }
-});
+})
 ```
 
 ## Uso no Teste (Resultado Final)
@@ -170,43 +170,43 @@ em branco. Nenhum assert dentro do Arrange; nenhuma ação nova depois do Assert
 
 ```ts
 // specs/auth/login.spec.ts
-import { expect } from "@wdio/globals";
-import { FIXTURES } from "../../support/test-data/fixtures";
+import { expect } from "@wdio/globals"
+import { FIXTURES } from "../../support/test-data/fixtures"
 
 describe("Login @smoke @auth", () => {
   it("deve fazer login com sucesso", async function () {
     // Arrange
-    await this.app.login.waitForReady();
+    await this.app.login.waitForReady()
 
     // Act
     await this.app.login.loginWith(
       FIXTURES.users.padrao.email,
       FIXTURES.users.padrao.password,
-    );
+    )
 
     // Assert
-    await expect(this.app.home.greeting).toBeDisplayed();
-  });
-});
+    await expect(this.app.home.greeting).toBeDisplayed()
+  })
+})
 ```
 
 ```ts
 // specs/perfil/badge-premium.spec.ts — exemplo de teste que NÃO é sobre login
-import { expect } from "@wdio/globals";
-import { FIXTURES } from "../../support/test-data/fixtures";
+import { expect } from "@wdio/globals"
+import { FIXTURES } from "../../support/test-data/fixtures"
 
 describe("Perfil — Selo Premium @regression @perfil", () => {
   it("usuário premium vê selo no perfil", async function () {
     // Arrange — login via Test API (pula UI de login)
-    await this.app.auth.loginAs(FIXTURES.users.premium);
+    await this.app.auth.loginAs(FIXTURES.users.premium)
 
     // Act
-    await this.app.profile.open();
+    await this.app.profile.open()
 
     // Assert
-    await expect(this.app.profile.premiumBadge).toBeDisplayed();
-  });
-});
+    await expect(this.app.profile.premiumBadge).toBeDisplayed()
+  })
+})
 ```
 
 > Use `function () {}` em `it`/`beforeEach`/`afterEach` (não arrow function), senão você perde acesso ao `this.app` e ao `this.currentTest`.
@@ -381,20 +381,20 @@ Roda antes de qualquer worker do WDIO subir. Lugar para:
 
 ```ts
 // config/hooks/onPrepare.ts
-import { testApi } from "../../support/test-api/client";
-import { seedFixtures } from "../../support/test-data/seed";
-import { writeFixturesFile } from "../../support/test-data/fixtures-store";
+import { testApi } from "../../support/test-api/client"
+import { seedFixtures } from "../../support/test-data/seed"
+import { writeFixturesFile } from "../../support/test-data/fixtures-store"
 
 export async function onPrepare() {
-  await testApi.ping(); // fail-fast se backend não responder
-  const fixtures = await seedFixtures();
-  await writeFixturesFile(fixtures);
+  await testApi.ping() // fail-fast se backend não responder
+  const fixtures = await seedFixtures()
+  await writeFixturesFile(fixtures)
 }
 ```
 
 ```ts
 // support/test-data/seed.ts
-import { testApi } from "../test-api/client";
+import { testApi } from "../test-api/client"
 
 export async function seedFixtures() {
   // executa em paralelo o que não tem dependência
@@ -402,13 +402,13 @@ export async function seedFixtures() {
     testApi.createUser({ profile: "novo" }),
     testApi.createUser({ profile: "padrao" }),
     testApi.createUser({ profile: "premium" }),
-  ]);
+  ])
 
   // dependências sequenciais depois
-  const multiEmpresa = await testApi.createUser({ profile: "padrao" });
-  await testApi.seedEmpresas(multiEmpresa.id, 3);
+  const multiEmpresa = await testApi.createUser({ profile: "padrao" })
+  await testApi.seedEmpresas(multiEmpresa.id, 3)
 
-  return { users: { novo, padrao, premium, multiEmpresa } };
+  return { users: { novo, padrao, premium, multiEmpresa } }
 }
 ```
 
@@ -423,8 +423,8 @@ Só consome via `FIXTURES.*`. Nunca cria, nunca altera.
 
 ```ts
 // support/test-data/fixtures.ts
-import { readFixturesFile } from "./fixtures-store";
-export const FIXTURES = readFixturesFile(); // tipado via gen do schema da Test API
+import { readFixturesFile } from "./fixtures-store"
+export const FIXTURES = readFixturesFile() // tipado via gen do schema da Test API
 ```
 
 ## Login via Test API
@@ -476,25 +476,25 @@ o `afterEach` global captura e anexa ao Allure:
 
 ```ts
 // support/evidence.ts
-import allure from "@wdio/allure-reporter";
+import allure from "@wdio/allure-reporter"
 
 export async function captureFailureEvidence(test: Mocha.Test) {
-  const screenshot = await browser.takeScreenshot();
+  const screenshot = await browser.takeScreenshot()
   allure.addAttachment(
     "screenshot",
     Buffer.from(screenshot, "base64"),
     "image/png",
-  );
+  )
 
-  const pageSource = await browser.getPageSource();
-  allure.addAttachment("page-source", pageSource, "application/xml");
+  const pageSource = await browser.getPageSource()
+  allure.addAttachment("page-source", pageSource, "application/xml")
 
   if (browser.isAndroid) {
     const logcat = await browser.execute("mobile: shell", {
       command: "logcat",
       args: ["-d", "-t", "500"],
-    });
-    allure.addAttachment("logcat", String(logcat), "text/plain");
+    })
+    allure.addAttachment("logcat", String(logcat), "text/plain")
   }
   // vídeo é anexado automaticamente pelo wdio-video-reporter
 }
@@ -503,9 +503,9 @@ export async function captureFailureEvidence(test: Mocha.Test) {
 Allure metadata por suíte (em `describe`/`before`):
 
 ```ts
-allure.feature("Login");
-allure.label("severity", "critical");
-allure.owner("time-mobile");
+allure.feature("Login")
+allure.label("severity", "critical")
+allure.owner("time-mobile")
 ```
 
 ---

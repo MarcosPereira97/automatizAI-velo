@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 import {
   Search,
   Package,
@@ -6,26 +6,26 @@ import {
   XCircle,
   Clock,
   Loader2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   formatPrice,
   Order,
   ExteriorColor,
   WheelType,
-} from "@/store/configuratorStore";
-import { getOrderByNumber } from "@/hooks/useOrders";
-import Header from "@/components/landing/Header";
+} from "@/store/configuratorStore"
+import { getOrderByNumber } from "@/hooks/useOrders"
+import Header from "@/components/landing/Header"
 
-import glacierBlueAero from "@/assets/glacier-blue-aero-wheels.png";
-import glacierBlueSport from "@/assets/glacier-blue-sport-wheels.png";
-import lunarWhiteAero from "@/assets/lunar-white-aero-wheels.png";
-import lunarWhiteSport from "@/assets/lunar-white-sport-wheels.png";
-import midnightBlackAero from "@/assets/midnight-black-aero-wheels.png";
-import midnightBlackSport from "@/assets/midnight-black-sport-wheels.png";
+import glacierBlueAero from "@/assets/glacier-blue-aero-wheels.png"
+import glacierBlueSport from "@/assets/glacier-blue-sport-wheels.png"
+import lunarWhiteAero from "@/assets/lunar-white-aero-wheels.png"
+import lunarWhiteSport from "@/assets/lunar-white-sport-wheels.png"
+import midnightBlackAero from "@/assets/midnight-black-aero-wheels.png"
+import midnightBlackSport from "@/assets/midnight-black-sport-wheels.png"
 
 const carImages: Record<ExteriorColor, Record<WheelType, string>> = {
   "glacier-blue": {
@@ -40,25 +40,25 @@ const carImages: Record<ExteriorColor, Record<WheelType, string>> = {
     aero: midnightBlackAero,
     sport: midnightBlackSport,
   },
-};
+}
 
 const colorLabels: Record<ExteriorColor, string> = {
   "glacier-blue": "Glacier Blue",
   "lunar-white": "Lunar White",
   "midnight-black": "Midnight Black",
-};
+}
 
 const statusVariants = {
   APROVADO: { className: "bg-green-100 text-green-700", Icon: CheckCircle },
   EM_ANALISE: { className: "bg-amber-100 text-amber-700", Icon: Clock },
   REPROVADO: { className: "bg-red-100 text-red-700", Icon: XCircle },
-} as const;
+} as const
 
 const StatusBadge = ({ status }: { status: string }) => {
   const variant =
     statusVariants[status as keyof typeof statusVariants] ??
-    statusVariants.REPROVADO;
-  const { className, Icon } = variant;
+    statusVariants.REPROVADO
+  const { className, Icon } = variant
   return (
     <div
       role="status"
@@ -67,36 +67,36 @@ const StatusBadge = ({ status }: { status: string }) => {
       <Icon className="w-4 h-4" />
       {status}
     </div>
-  );
-};
+  )
+}
 
 const OrderLookup = () => {
-  const [orderId, setOrderId] = useState("");
-  const [searchedOrder, setSearchedOrder] = useState<Order | null>(null);
-  const [notFound, setNotFound] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [orderId, setOrderId] = useState("")
+  const [searchedOrder, setSearchedOrder] = useState<Order | null>(null)
+  const [notFound, setNotFound] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setNotFound(false);
-    setSearchedOrder(null);
-    setIsLoading(true);
+    e.preventDefault()
+    setNotFound(false)
+    setSearchedOrder(null)
+    setIsLoading(true)
 
-    const { order, error } = await getOrderByNumber(orderId);
+    const { order, error } = await getOrderByNumber(orderId)
 
-    setIsLoading(false);
+    setIsLoading(false)
 
     if (error) {
-      setNotFound(true);
-      return;
+      setNotFound(true)
+      return
     }
 
     if (order) {
-      setSearchedOrder(order);
+      setSearchedOrder(order)
     } else {
-      setNotFound(true);
+      setNotFound(true)
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -292,7 +292,7 @@ const OrderLookup = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrderLookup;
+export default OrderLookup

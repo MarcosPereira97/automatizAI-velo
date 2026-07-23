@@ -1,47 +1,51 @@
-import { Battery, Gauge, Zap, Shield, Cpu, Wind } from "lucide-react";
+import { Battery, Gauge, Zap, Shield, Cpu, Wind } from "lucide-react"
 
 const specs = [
   {
     icon: Battery,
     title: "Bateria",
     value: "100 kWh",
-    description: "Bateria de alta densidade com tecnologia de última geração"
+    description: "Bateria de alta densidade com tecnologia de última geração",
   },
   {
     icon: Gauge,
     title: "Velocidade Máxima",
     value: "250 km/h",
-    description: "Performance limitada eletronicamente para sua segurança"
+    description: "Performance limitada eletronicamente para sua segurança",
   },
   {
     icon: Zap,
     title: "Carregamento Rápido",
     value: "40 min",
-    description: "De 10% a 80% em carregadores de 350kW"
+    description: "De 10% a 80% em carregadores de 350kW",
   },
   {
     icon: Shield,
     title: "Segurança",
     value: "5 Estrelas",
-    description: "Classificação máxima no Latin NCAP"
+    description: "Classificação máxima no Latin NCAP",
   },
   {
     icon: Cpu,
     title: "Tecnologia",
     value: "VelôOS 3.0",
-    description: "Sistema operacional com atualizações OTA"
+    description: "Sistema operacional com atualizações OTA",
   },
   {
     icon: Wind,
     title: "Aerodinâmica",
     value: "Cx 0.21",
-    description: "Coeficiente de arrasto líder da categoria"
-  }
-];
+    description: "Coeficiente de arrasto líder da categoria",
+  },
+]
 
 const SpecsSection = () => {
   return (
-    <section id="specs" className="py-24 bg-background" data-testid="specs-section">
+    <section
+      id="specs"
+      className="py-24 bg-background"
+      data-testid="specs-section"
+    >
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -49,7 +53,7 @@ const SpecsSection = () => {
             Especificações Técnicas
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            O Velô Sprint combina tecnologia de ponta com design sofisticado 
+            O Velô Sprint combina tecnologia de ponta com design sofisticado
             para entregar uma experiência de condução incomparável.
           </p>
         </div>
@@ -101,7 +105,7 @@ const SpecsSection = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SpecsSection;
+export default SpecsSection

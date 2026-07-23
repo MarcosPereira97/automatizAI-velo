@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
-import logo from "@/assets/brand.svg";
+import { Link } from "react-router-dom"
+import { Instagram, Facebook, Youtube, Linkedin } from "lucide-react"
+import logo from "@/assets/brand.svg"
 
 const Footer = () => {
   return (
@@ -11,19 +11,36 @@ const Footer = () => {
           <div className="space-y-4">
             <img src={logo} alt="Velô" className="h-8 brightness-0 invert" />
             <p className="text-primary-foreground/70 text-sm">
-              Redefinindo a mobilidade elétrica com design, performance e tecnologia de ponta.
+              Redefinindo a mobilidade elétrica com design, performance e
+              tecnologia de ponta.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-accent transition-colors" aria-label="Instagram">
+              <a
+                href="#"
+                className="hover:text-accent transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram size={20} />
               </a>
-              <a href="#" className="hover:text-accent transition-colors" aria-label="Facebook">
+              <a
+                href="#"
+                className="hover:text-accent transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-accent transition-colors" aria-label="Youtube">
+              <a
+                href="#"
+                className="hover:text-accent transition-colors"
+                aria-label="Youtube"
+              >
                 <Youtube size={20} />
               </a>
-              <a href="#" className="hover:text-accent transition-colors" aria-label="LinkedIn">
+              <a
+                href="#"
+                className="hover:text-accent transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={20} />
               </a>
             </div>
@@ -34,7 +51,10 @@ const Footer = () => {
             <h4 className="font-semibold">Modelos</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>
-                <Link to="/configure" className="hover:text-primary-foreground transition-colors">
+                <Link
+                  to="/configure"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Velô Sprint
                 </Link>
               </li>
@@ -52,22 +72,34 @@ const Footer = () => {
             <h4 className="font-semibold">Suporte</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>
-                <a href="#faq" className="hover:text-primary-foreground transition-colors">
+                <a
+                  href="#faq"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   FAQ
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Contato
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Assistência 24h
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Rede de Carregadores
                 </a>
               </li>
@@ -79,17 +111,26 @@ const Footer = () => {
             <h4 className="font-semibold">Legal</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>
-                <Link to="/termos" className="hover:text-primary-foreground transition-colors">
+                <Link
+                  to="/termos"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <Link to="/privacidade" className="hover:text-primary-foreground transition-colors">
+                <Link
+                  to="/privacidade"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Política de Privacidade
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <a
+                  href="#"
+                  className="hover:text-primary-foreground transition-colors"
+                >
                   Cookies
                 </a>
               </li>
@@ -116,7 +157,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

@@ -16,10 +16,10 @@ Garantir que o Cliente consegue acessar a página inicial, visualizar as informa
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Acessar a URL base do sistema | A Landing Page é carregada com sucesso exibindo o Hero, Especificações, FAQ e CTA. |
-| 2  | Clicar no botão para configurar ou reservar o veículo | O sistema deve redirecionar o Cliente para a página do Configurador (`/configure`). |
+| Id  | Ação                                                  | Resultado Esperado                                                                  |
+| --- | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 1   | Acessar a URL base do sistema                         | A Landing Page é carregada com sucesso exibindo o Hero, Especificações, FAQ e CTA.  |
+| 2   | Clicar no botão para configurar ou reservar o veículo | O sistema deve redirecionar o Cliente para a página do Configurador (`/configure`). |
 
 #### Resultados Esperados
 
@@ -45,12 +45,12 @@ Validar se as escolhas de cores e rodas ("Sport") refletem corretamente no preç
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Verificar o preço inicial de venda | O preço de venda deve ser R$ 40.000,00. |
-| 2  | Selecionar uma cor exterior diferente ("Midnight Black" ou "Lunar White") | A cor do veículo no preview é alterada, mas o preço permanece R$ 40.000,00. |
-| 3  | Selecionar a opção de roda "Sport Wheels" | A roda do veículo no preview é alterada e o preço total é atualizado com acréscimo de R$ 2.000,00 (Total: R$ 42.000,00). |
-| 4  | Selecionar novamente a roda "Aero Wheels" | O preço total é decrementado em R$ 2.000,00, voltando para R$ 40.000,00. |
+| Id  | Ação                                                                      | Resultado Esperado                                                                                                       |
+| --- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Verificar o preço inicial de venda                                        | O preço de venda deve ser R$ 40.000,00.                                                                                  |
+| 2   | Selecionar uma cor exterior diferente ("Midnight Black" ou "Lunar White") | A cor do veículo no preview é alterada, mas o preço permanece R$ 40.000,00.                                              |
+| 3   | Selecionar a opção de roda "Sport Wheels"                                 | A roda do veículo no preview é alterada e o preço total é atualizado com acréscimo de R$ 2.000,00 (Total: R$ 42.000,00). |
+| 4   | Selecionar novamente a roda "Aero Wheels"                                 | O preço total é decrementado em R$ 2.000,00, voltando para R$ 40.000,00.                                                 |
 
 #### Resultados Esperados
 
@@ -76,12 +76,12 @@ Validar se a seleção de opcionais ("Precision Park" e "Flux Capacitor") atuali
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Marcar o checkbox do opcional "Precision Park" | O preço de venda deve ser acrescido de R$ 5.500,00 (Total temporário: R$ 45.500,00). |
-| 2  | Marcar o checkbox do opcional "Flux Capacitor" | O preço de venda deve ser acrescido de R$ 5.000,00 (Total temporário: R$ 50.500,00). |
-| 3  | Desmarcar os checkboxes dos opcionais | O preço total deve subtrair os valores respectivos e voltar a R$ 40.000,00. |
-| 4  | Clicar no botão "Monte o Seu" (Checkout) | O usuário é redirecionado para a página de checkout (`/order`) com os valores persistidos. |
+| Id  | Ação                                           | Resultado Esperado                                                                         |
+| --- | ---------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 1   | Marcar o checkbox do opcional "Precision Park" | O preço de venda deve ser acrescido de R$ 5.500,00 (Total temporário: R$ 45.500,00).       |
+| 2   | Marcar o checkbox do opcional "Flux Capacitor" | O preço de venda deve ser acrescido de R$ 5.000,00 (Total temporário: R$ 50.500,00).       |
+| 3   | Desmarcar os checkboxes dos opcionais          | O preço total deve subtrair os valores respectivos e voltar a R$ 40.000,00.                |
+| 4   | Clicar no botão "Monte o Seu" (Checkout)       | O usuário é redirecionado para a página de checkout (`/order`) com os valores persistidos. |
 
 #### Resultados Esperados
 
@@ -106,13 +106,13 @@ Validar os critérios de obrigatoriedade dos campos de dados pessoais no Checkou
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Deixar todos os campos do formulário em branco e clicar em "Confirmar Pedido" | O sistema não avança e exibe mensagens de erro sob os campos (Nome, Sobrenome, Email, Tel, CPF, Loja, Termos). |
-| 2  | Inserir apenas 1 letra no campo "Nome" e "Sobrenome" e confirmar | O sistema exibe erro: "Nome deve ter pelo menos 2 caracteres". |
-| 3  | Inserir um e-mail sem formato válido (ex: `cliente@.com`) e confirmar | O sistema exibe erro: "Email inválido". |
-| 4  | Inserir CPF incompleto ou inválido e confirmar | O sistema exibe erro de "CPF inválido". |
-| 5  | Preencher todos os campos corretamente, mas não marcar "Li e aceito os Termos" | O sistema exibe erro: "Aceite os termos". |
+| Id  | Ação                                                                           | Resultado Esperado                                                                                             |
+| --- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| 1   | Deixar todos os campos do formulário em branco e clicar em "Confirmar Pedido"  | O sistema não avança e exibe mensagens de erro sob os campos (Nome, Sobrenome, Email, Tel, CPF, Loja, Termos). |
+| 2   | Inserir apenas 1 letra no campo "Nome" e "Sobrenome" e confirmar               | O sistema exibe erro: "Nome deve ter pelo menos 2 caracteres".                                                 |
+| 3   | Inserir um e-mail sem formato válido (ex: `cliente@.com`) e confirmar          | O sistema exibe erro: "Email inválido".                                                                        |
+| 4   | Inserir CPF incompleto ou inválido e confirmar                                 | O sistema exibe erro de "CPF inválido".                                                                        |
+| 5   | Preencher todos os campos corretamente, mas não marcar "Li e aceito os Termos" | O sistema exibe erro: "Aceite os termos".                                                                      |
 
 #### Resultados Esperados
 
@@ -139,12 +139,12 @@ Validar a criação de um pedido bem-sucedido com pagamento à vista.
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Preencher o formulário com dados válidos e selecionar a loja | Os campos não apresentam erros. |
-| 2  | Selecionar a aba "À Vista" na Forma de Pagamento | O valor total de "Resumo" e "À Vista" exibem R$ 40.000,00. |
-| 3  | Marcar o aceite dos termos de uso e clicar em "Confirmar Pedido" | O botão mostra status de carregamento e o pedido é direcionado para a página de Confirmação (`/success`). |
-| 4  | Verificar a página de Confirmação | A página exibe "Pedido Aprovado!", gerando um número de pedido e informações do cliente e resumo. |
+| Id  | Ação                                                             | Resultado Esperado                                                                                        |
+| --- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 1   | Preencher o formulário com dados válidos e selecionar a loja     | Os campos não apresentam erros.                                                                           |
+| 2   | Selecionar a aba "À Vista" na Forma de Pagamento                 | O valor total de "Resumo" e "À Vista" exibem R$ 40.000,00.                                                |
+| 3   | Marcar o aceite dos termos de uso e clicar em "Confirmar Pedido" | O botão mostra status de carregamento e o pedido é direcionado para a página de Confirmação (`/success`). |
+| 4   | Verificar a página de Confirmação                                | A página exibe "Pedido Aprovado!", gerando um número de pedido e informações do cliente e resumo.         |
 
 #### Resultados Esperados
 
@@ -169,12 +169,12 @@ Validar a regra de aprovação automática de crédito quando o score do CPF for
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Preencher formulário válido usando um CPF com score alto | Sem erros de preenchimento. |
-| 2  | Selecionar "Financiamento" e preencher "Valor da Entrada" como `0` | Parcela (12x) reflete o cálculo com 2% a.m: `(40000 / 12) * 1.02`. |
-| 3  | Aceitar os termos e clicar em "Confirmar Pedido" | Sistema envia CPF para análise de crédito e processa a requisição. |
-| 4  | Observar a navegação pós-submissão | O sistema direciona à página de sucesso exibindo "Pedido Aprovado!". |
+| Id  | Ação                                                               | Resultado Esperado                                                   |
+| --- | ------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| 1   | Preencher formulário válido usando um CPF com score alto           | Sem erros de preenchimento.                                          |
+| 2   | Selecionar "Financiamento" e preencher "Valor da Entrada" como `0` | Parcela (12x) reflete o cálculo com 2% a.m: `(40000 / 12) * 1.02`.   |
+| 3   | Aceitar os termos e clicar em "Confirmar Pedido"                   | Sistema envia CPF para análise de crédito e processa a requisição.   |
+| 4   | Observar a navegação pós-submissão                                 | O sistema direciona à página de sucesso exibindo "Pedido Aprovado!". |
 
 #### Resultados Esperados
 
@@ -199,11 +199,11 @@ Validar a regra do score de crédito moderado, que destina o pedido para verific
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Preencher dados válidos com CPF de score entre 501 e 700 | Campos válidos. |
-| 2  | Selecionar "Financiamento", entrada `0`, aceitar termos e confirmar | Sistema processa a requisição de crédito. |
-| 3  | Observar a confirmação de criação do pedido | A rota redireciona, mas o aviso visual deve demonstrar que o pedido foi criado com status "EM ANÁLISE" (ícone de relógio na consulta do pedido ou texto correspondente). |
+| Id  | Ação                                                                | Resultado Esperado                                                                                                                                                       |
+| --- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Preencher dados válidos com CPF de score entre 501 e 700            | Campos válidos.                                                                                                                                                          |
+| 2   | Selecionar "Financiamento", entrada `0`, aceitar termos e confirmar | Sistema processa a requisição de crédito.                                                                                                                                |
+| 3   | Observar a confirmação de criação do pedido                         | A rota redireciona, mas o aviso visual deve demonstrar que o pedido foi criado com status "EM ANÁLISE" (ícone de relógio na consulta do pedido ou texto correspondente). |
 
 #### Resultados Esperados
 
@@ -228,12 +228,12 @@ Validar a regra de reprovação de crédito quando o Score for menor ou igual a 
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Preencher dados com formulário válido, inserindo um CPF com score baixo | Os campos ficam válidos. |
-| 2  | Na aba Financiamento, informar entrada inferior a 50% do total | Formulário preenchido e parcelas calculadas da diferença. |
-| 3  | Aceitar termos e clicar em "Confirmar Pedido" | Sistema processa e avalia o crédito pela API. |
-| 4  | Observar a página resultante (`/success`) | O redirecionamento ocorre, mas a página exibe "Crédito Reprovado" ou falha visual (ícone de X) com a mensagem apropriada. |
+| Id  | Ação                                                                    | Resultado Esperado                                                                                                        |
+| --- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Preencher dados com formulário válido, inserindo um CPF com score baixo | Os campos ficam válidos.                                                                                                  |
+| 2   | Na aba Financiamento, informar entrada inferior a 50% do total          | Formulário preenchido e parcelas calculadas da diferença.                                                                 |
+| 3   | Aceitar termos e clicar em "Confirmar Pedido"                           | Sistema processa e avalia o crédito pela API.                                                                             |
+| 4   | Observar a página resultante (`/success`)                               | O redirecionamento ocorre, mas a página exibe "Crédito Reprovado" ou falha visual (ícone de X) com a mensagem apropriada. |
 
 #### Resultados Esperados
 
@@ -258,12 +258,12 @@ Validar a regra de exceção na aprovação de crédito, garantindo que qualquer
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Preencher campos obrigatórios e usar CPF de Score Baixo | Tudo preenchido corretamente. |
-| 2  | Escolher "Financiamento" e definir "Valor da Entrada" igual a `20000` (50% do total) ou `25000` | Resumo atualiza e a parcela exibe o valor diluído: `((Total - Entrada) / 12) * 1.02`. |
-| 3  | Aceitar termos e clicar em "Confirmar Pedido" | Sistema efetua solicitação em background. |
-| 4  | Verificar rota de confirmação | Navegação finalizada com a mensagem de "Pedido Aprovado!", comprovando que a exceção da entrada sobrepôs a reprovação do score baixo. |
+| Id  | Ação                                                                                            | Resultado Esperado                                                                                                                    |
+| --- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Preencher campos obrigatórios e usar CPF de Score Baixo                                         | Tudo preenchido corretamente.                                                                                                         |
+| 2   | Escolher "Financiamento" e definir "Valor da Entrada" igual a `20000` (50% do total) ou `25000` | Resumo atualiza e a parcela exibe o valor diluído: `((Total - Entrada) / 12) * 1.02`.                                                 |
+| 3   | Aceitar termos e clicar em "Confirmar Pedido"                                                   | Sistema efetua solicitação em background.                                                                                             |
+| 4   | Verificar rota de confirmação                                                                   | Navegação finalizada com a mensagem de "Pedido Aprovado!", comprovando que a exceção da entrada sobrepôs a reprovação do score baixo. |
 
 #### Resultados Esperados
 
@@ -288,11 +288,11 @@ Garantir que um usuário comum pode revisar o status de sua compra digitando um 
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Digitar o número do pedido válido no campo "Número do Pedido" | O campo aceita e permite prosseguir. |
-| 2  | Clicar no botão "Buscar Pedido" | O sistema deve entrar em estado de `loading` por uns instantes. |
-| 3  | Aguardar a apresentação dos dados | O componente exibe um card com: Status atual (Aprovado/Em Analise/Reprovado), Informações do Carro (Core, Opcionais), Dados do Cliente e Valores Financeiros. |
+| Id  | Ação                                                          | Resultado Esperado                                                                                                                                            |
+| --- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Digitar o número do pedido válido no campo "Número do Pedido" | O campo aceita e permite prosseguir.                                                                                                                          |
+| 2   | Clicar no botão "Buscar Pedido"                               | O sistema deve entrar em estado de `loading` por uns instantes.                                                                                               |
+| 3   | Aguardar a apresentação dos dados                             | O componente exibe um card com: Status atual (Aprovado/Em Analise/Reprovado), Informações do Carro (Core, Opcionais), Dados do Cliente e Valores Financeiros. |
 
 #### Resultados Esperados
 
@@ -316,12 +316,12 @@ Validar que ordens não cadastradas ou strings aleatórias não vazam dados nem 
 
 #### Passos
 
-| Id | Ação | Resultado Esperado |
-|----|------|--------------------|
-| 1  | Inserir um número de pedido que não existe ou formato incorreto (ex: `VLO-INEXISTENTE`) | Form preenchido com ordem fake. |
-| 2  | Clicar em "Buscar Pedido" | O sistema busca na API e não encontra correspondente. |
-| 3  | Observar o feedback na interface | O sistema mostra de forma visível a mensagem "Pedido não encontrado" e o ícone de X num painel vermelho. Dados em branco continuam ocultos. |
-| 4  | Clicar em buscar com o campo de pedido vazio | O botão deve permanecer desabilitado antes de fornecer algum caractere. |
+| Id  | Ação                                                                                    | Resultado Esperado                                                                                                                          |
+| --- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Inserir um número de pedido que não existe ou formato incorreto (ex: `VLO-INEXISTENTE`) | Form preenchido com ordem fake.                                                                                                             |
+| 2   | Clicar em "Buscar Pedido"                                                               | O sistema busca na API e não encontra correspondente.                                                                                       |
+| 3   | Observar o feedback na interface                                                        | O sistema mostra de forma visível a mensagem "Pedido não encontrado" e o ícone de X num painel vermelho. Dados em branco continuam ocultos. |
+| 4   | Clicar em buscar com o campo de pedido vazio                                            | O botão deve permanecer desabilitado antes de fornecer algum caractere.                                                                     |
 
 #### Resultados Esperados
 

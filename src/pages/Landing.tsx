@@ -1,9 +1,9 @@
-import Header from "@/components/landing/Header";
-import HeroSection from "@/components/landing/HeroSection";
-import SpecsSection from "@/components/landing/SpecsSection";
-import CTASection from "@/components/landing/CTASection";
-import FAQSection from "@/components/landing/FAQSection";
-import Footer from "@/components/landing/Footer";
+import Header from "@/components/landing/Header"
+import HeroSection from "@/components/landing/HeroSection"
+import SpecsSection from "@/components/landing/SpecsSection"
+import CTASection from "@/components/landing/CTASection"
+import FAQSection from "@/components/landing/FAQSection"
+import Footer from "@/components/landing/Footer"
 
 const Landing = () => {
   return (
@@ -17,7 +17,7 @@ const Landing = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Landing;
+export default Landing
