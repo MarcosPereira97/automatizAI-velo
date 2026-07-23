@@ -34,7 +34,15 @@ export function createOrderLookupActions(page: Page) {
 
     async searchOrder(code: string) {
       await orderInput.fill(code)
+
+      const responsePromise = page.waitForResponse(
+        (response) =>
+          response.url().includes("orders") &&
+          response.request().method() !== "OPTIONS"
+      )
+
       await searchButton.click()
+      await responsePromise
     },
 
     async validateOrderDetails(order: OrderDetails) {

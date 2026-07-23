@@ -133,14 +133,18 @@ test.describe("Checkout", () => {
     test("deve finalizar o pedido com pagamento à vista com sucesso", async ({
       app,
     }) => {
-      await deleteOrderByEmail(dataTest.orderApproved.customer.email)
+      const customer = {
+        ...dataTest.orderApproved.customer,
+        email: "qa_checkout@velo.com",
+      }
+      await deleteOrderByEmail(customer.email)
 
       // Arrange
       await app.checkout.setupCartFromHome(
         dataTest.orderApproved.total_price,
         app.configurator,
       )
-      await app.checkout.fillCustomerlData(dataTest.orderApproved.customer)
+      await app.checkout.fillCustomerlData(customer)
       await app.checkout.selectStore(dataTest.orderApproved.store)
 
       // Act
@@ -153,9 +157,11 @@ test.describe("Checkout", () => {
     test("deve aprovar automaticamente o crédito quando o score do CPF for maior que 700 no financiamento.", async ({
       app,
     }) => {
-      await deleteOrderByEmail(
-        dataTest.orderApprovedFinanciamento.customer.email,
-      )
+      const customer = {
+        ...dataTest.orderApprovedFinanciamento.customer,
+        email: "qa_checkout_fin@velo.com",
+      }
+      await deleteOrderByEmail(customer.email)
       await app.mock.creditAnalysis(710)
 
       // Arrange
@@ -163,9 +169,7 @@ test.describe("Checkout", () => {
         dataTest.orderApprovedFinanciamento.total_price,
         app.configurator,
       )
-      await app.checkout.fillCustomerlData(
-        dataTest.orderApprovedFinanciamento.customer,
-      )
+      await app.checkout.fillCustomerlData(customer)
       await app.checkout.selectStore(dataTest.orderApprovedFinanciamento.store)
 
       // Act
