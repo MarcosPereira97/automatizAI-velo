@@ -31,7 +31,7 @@ describe("useOrders utilities", () => {
         total_price: 55000,
         status: "EM_ANALISE",
         created_at: "2026-07-23T10:00:00Z",
-        updated_at: "2026-07-23T10:00:00Z"
+        updated_at: "2026-07-23T10:00:00Z",
       };
 
       const result = dbOrderToOrder(mockDbOrder);
@@ -68,11 +68,11 @@ describe("useOrders utilities", () => {
         total_price: 40000,
         status: "APROVADO",
         created_at: "2026-07-23T11:00:00Z",
-        updated_at: "2026-07-23T11:00:00Z"
+        updated_at: "2026-07-23T11:00:00Z",
       } as DbOrder;
 
       const result = dbOrderToOrder(mockDbOrder);
-      
+
       expect(result.configuration.optionals).toEqual([]);
       expect(result.customer.name).toBe("Jane");
       expect(result.customer.surname).toBe(""); // No surname provided

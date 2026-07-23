@@ -16,7 +16,8 @@
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
     "test:install": "playwright install",
-    "test:codegen": "playwright codegen http://localhost:5173"
+    "test:codegen": "playwright codegen http://localhost:5173",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

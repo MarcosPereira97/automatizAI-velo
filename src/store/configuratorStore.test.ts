@@ -75,48 +75,78 @@ describe("configuratorStore functions", () => {
 describe("useConfiguratorStore state rules", () => {
   beforeEach(() => {
     useConfiguratorStore.getState().resetConfiguration();
-    useConfiguratorStore.setState({ orders: [], currentUserEmail: null, viewMode: 'exterior' });
+    useConfiguratorStore.setState({
+      orders: [],
+      currentUserEmail: null,
+      viewMode: "exterior",
+    });
   });
 
   it("should change viewMode to exterior when setting exterior color", () => {
-    useConfiguratorStore.getState().setViewMode('interior');
-    useConfiguratorStore.getState().setExteriorColor('midnight-black');
-    expect(useConfiguratorStore.getState().viewMode).toBe('exterior');
-    expect(useConfiguratorStore.getState().configuration.exteriorColor).toBe('midnight-black');
+    useConfiguratorStore.getState().setViewMode("interior");
+    useConfiguratorStore.getState().setExteriorColor("midnight-black");
+    expect(useConfiguratorStore.getState().viewMode).toBe("exterior");
+    expect(useConfiguratorStore.getState().configuration.exteriorColor).toBe(
+      "midnight-black",
+    );
   });
 
   it("should change viewMode to interior when setting interior color", () => {
-    useConfiguratorStore.getState().setInteriorColor('deep-blue');
-    expect(useConfiguratorStore.getState().viewMode).toBe('interior');
-    expect(useConfiguratorStore.getState().configuration.interiorColor).toBe('deep-blue');
+    useConfiguratorStore.getState().setInteriorColor("deep-blue");
+    expect(useConfiguratorStore.getState().viewMode).toBe("interior");
+    expect(useConfiguratorStore.getState().configuration.interiorColor).toBe(
+      "deep-blue",
+    );
   });
 
   it("should toggle optionals correctly without duplicates", () => {
-    useConfiguratorStore.getState().toggleOptional('precision-park');
-    expect(useConfiguratorStore.getState().configuration.optionals).toContain('precision-park');
-    
-    useConfiguratorStore.getState().toggleOptional('precision-park');
-    expect(useConfiguratorStore.getState().configuration.optionals).not.toContain('precision-park');
+    useConfiguratorStore.getState().toggleOptional("precision-park");
+    expect(useConfiguratorStore.getState().configuration.optionals).toContain(
+      "precision-park",
+    );
+
+    useConfiguratorStore.getState().toggleOptional("precision-park");
+    expect(
+      useConfiguratorStore.getState().configuration.optionals,
+    ).not.toContain("precision-park");
   });
 
   it("should only allow login if user has orders", () => {
-    const successWithoutOrders = useConfiguratorStore.getState().login('test@test.com');
+    const successWithoutOrders = useConfiguratorStore
+      .getState()
+      .login("test@test.com");
     expect(successWithoutOrders).toBe(false);
     expect(useConfiguratorStore.getState().currentUserEmail).toBeNull();
 
     // Add a fake order
     useConfiguratorStore.getState().addOrder({
-      id: 'VLO-123',
-      customer: { email: 'test@test.com', name: 'Test', surname: 'User', phone: '', cpf: '', store: '' },
-      configuration: { exteriorColor: 'glacier-blue', interiorColor: 'carbon-black', wheelType: 'aero', optionals: [] },
+      id: "VLO-123",
+      customer: {
+        email: "test@test.com",
+        name: "Test",
+        surname: "User",
+        phone: "",
+        cpf: "",
+        store: "",
+      },
+      configuration: {
+        exteriorColor: "glacier-blue",
+        interiorColor: "carbon-black",
+        wheelType: "aero",
+        optionals: [],
+      },
       totalPrice: 40000,
-      paymentMethod: 'avista',
-      status: 'APROVADO',
-      createdAt: new Date().toISOString()
+      paymentMethod: "avista",
+      status: "APROVADO",
+      createdAt: new Date().toISOString(),
     });
 
-    const successWithOrders = useConfiguratorStore.getState().login('test@test.com');
+    const successWithOrders = useConfiguratorStore
+      .getState()
+      .login("test@test.com");
     expect(successWithOrders).toBe(true);
-    expect(useConfiguratorStore.getState().currentUserEmail).toBe('test@test.com');
+    expect(useConfiguratorStore.getState().currentUserEmail).toBe(
+      "test@test.com",
+    );
   });
 });
