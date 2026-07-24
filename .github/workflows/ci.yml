@@ -82,7 +82,7 @@ jobs:
       - name: Deploy preview
         id: deploy
         run: |
-          URL=$(yarn --silent vercel deploy \
+          URL=$(yarn --silent vercel deploy --yes \
           --target=preview \
           --token=$VERCEL_TOKEN \
           --scope=$VERCEL_SCOPE)
