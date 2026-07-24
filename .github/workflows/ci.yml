@@ -4,6 +4,10 @@
 
 name: Continuous Integration
 
+permissions:
+  checks: write
+  contents: read
+
 on:
   push:
     branches:
@@ -40,9 +44,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      # Executa os testes unitários
+      # Executa os testes unitários e gera relatório JSON
       - name: Run unit tests
-        run: yarn test
+        run: yarn test --reporter=verbose --reporter=json --outputFile=vitest-report.json
+
+      # Publica o summary dos testes unitários no GitHub
+      - name: Unit Test Summary
+        if: ${{ !cancelled() }}
+        uses: dorny/test-reporter@v1
+        with:
+          name: Unit Tests Summary
+          path: vitest-report.json
+          reporter: jest-json
+          fail-on-error: false
 
   build-and-deploy:
     name: Build & Deploy Vercel Preview
@@ -106,6 +120,17 @@ jobs:
         env:
           BASE_URL: ${{needs.build-and-deploy.outputs.deployment-url}}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-json-report/results.json
+
+      # Publica o summary dos testes E2E no GitHub
+      - name: E2E Test Summary
+        if: ${{ !cancelled() }}
+        uses: dorny/test-reporter@v1
+        with:
+          name: E2E Tests Summary
+          path: playwright-json-report/results.json
+          reporter: playwright-json
+          fail-on-error: false
 
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}
