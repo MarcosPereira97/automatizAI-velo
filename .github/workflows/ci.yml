@@ -43,7 +43,7 @@ jobs:
 
       # Executa os testes unitários
       - name: Run unit tests
-        run: yarn test
+        run: yarn vitest run --reporter=verbose --reporter=github-actions
 
   build-and-deploy:
     name: Build & Deploy Vercel Preview
