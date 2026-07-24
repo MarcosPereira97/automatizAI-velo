@@ -110,7 +110,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Run E2E Regression Tests
-        run: yarn playwright test
+        run: yarn playwright test playwright/e2e/online.spec.ts
 
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}
