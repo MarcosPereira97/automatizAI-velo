@@ -78,15 +78,11 @@ jobs:
             --token=$VERCEL_TOKEN \
             --scope=$VERCEL_SCOPE
 
-      # 6. Build para o Vercel
-      - name: Build Vercel
-        run: yarn vercel build --token=$VERCEL_TOKEN
-
-      # 7. Deploy preview no vercel (Cloud Build avoids Sensitive Env issues)
+      # 6. Deploy preview no vercel (Cloud Build avoids Sensitive Env issues)
       - name: Deploy preview
         id: deploy
         run: |
-          URL=$(yarn --silent vercel deploy --prebuilt \
+          URL=$(yarn --silent vercel deploy --yes \
           --target=preview \
           --token=$VERCEL_TOKEN \
           --scope=$VERCEL_SCOPE)
