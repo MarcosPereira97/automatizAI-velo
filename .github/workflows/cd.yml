@@ -122,6 +122,7 @@ jobs:
         env:
           BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
           VERCEL_AUTOMATION_BYPASS_SECRET: ""
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       # 7. Relatório de Testes Automatizados
       - name: Upload Playwright report
