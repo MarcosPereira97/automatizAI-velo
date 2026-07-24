@@ -44,9 +44,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      # Executa os testes unitários e gera relatório JSON
+      # Executa os testes unitários e gera relatório JUnit
       - name: Run unit tests
-        run: yarn test --reporter=verbose --reporter=json --outputFile=vitest-report.json
+        run: yarn vitest run --reporter=verbose --reporter=junit --outputFile=vitest-report.xml
 
       # Publica o summary dos testes unitários no GitHub
       - name: Unit Test Summary
@@ -54,8 +54,8 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: Unit Tests Summary
-          path: vitest-report.json
-          reporter: jest-json
+          path: vitest-report.xml
+          reporter: jest-junit
           fail-on-error: false
 
   build-and-deploy:
@@ -120,7 +120,7 @@ jobs:
         env:
           BASE_URL: ${{needs.build-and-deploy.outputs.deployment-url}}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
-          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-json-report/results.json
+          PLAYWRIGHT_JUNIT_OUTPUT_NAME: playwright-junit-report/results.xml
 
       # Publica o summary dos testes E2E no GitHub
       - name: E2E Test Summary
@@ -128,8 +128,8 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: E2E Tests Summary
-          path: playwright-json-report/results.json
-          reporter: playwright-json
+          path: playwright-junit-report/results.xml
+          reporter: jest-junit
           fail-on-error: false
 
       - name: Upload Playwright Report
