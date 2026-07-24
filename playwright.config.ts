@@ -26,11 +26,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL:
-      "https://automatiz-ai-velo-1h5ggv4lf-marcospereira97s-projects.vercel.app",
+    baseURL: process.env.BASE_URL || "http://localhost:5173",
 
     extraHTTPHeaders: {
-      "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET || "",
+      "x-vercel-protection-bypass":
+        process.env.VERCEL_AUTOMATION_BYPASS_SECRET || "",
     },
 
     screenshot: "only-on-failure",
