@@ -102,11 +102,15 @@ jobs:
       - name: Install Playwright Browser
         run: yarn playwright install --with-deps chromium
 
+      - name: Pull Vercel Environment Variables
+        run: yarn vercel env pull .env --environment=preview --token=$VERCEL_TOKEN --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
       - name: Run E2E Regression Tests
         run: yarn playwright test
-        env:
-          BASE_URL: ${{needs.build-and-deploy.outputs.deployment-url}}
-          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
 
       - name: Upload Playwright Report
         if: ${{ !cancelled() }}
