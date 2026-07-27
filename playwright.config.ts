@@ -35,7 +35,13 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ["@testdino/playwright", { token: process.env.TESTDINO_TOKEN }],
+    [
+      "@testdino/playwright",
+      {
+        token: process.env.TESTDINO_TOKEN,
+        serverUrl: "https://reporter.testdino.com",
+      },
+    ],
     // Optional, enables native HTML upload
     ["html", { outputDir: "./playwright-report" }],
     // Mandatory reporter for JSON results
@@ -96,8 +102,8 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
+  /* Run your local dev server before starting the tests se não houver uma URL base definida (ex: rodando localmente) */
+  webServer: process.env.BASE_URL ? undefined : {
     command: "yarn dev",
     url: "http://localhost:5174",
     reuseExistingServer: !process.env.CI,
