@@ -42,7 +42,7 @@ jobs:
 
       # 5. Executa os testes unitários com Vitest
       - name: Run unit tests
-        run: yarn test
+        run: yarn test:unit
 
   build-and-deploy:
     name: Build & Deploy Vercel Preview
@@ -117,20 +117,18 @@ jobs:
         run: yarn playwright install --with-deps chromium
 
       # 6. Execução dos Testes de Regressão contra o Preview Deployado
-      - name: Run E2E Regression Tests
-        run: yarn playwright test
+      - name: Run with TestDino report
         env:
-          BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
-          VERCEL_AUTOMATION_BYPASS_SECRET: ""
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
+        run: npx playwright test
 
-      # 7. Relatório de Testes Automatizados
-      - name: Upload Playwright report
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7.0.1
+      # 7. Upload do Relatório do Playwright
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: playwright-report
-          path: playwright-report
+          path: playwright-report/
 
   promote:
     name: Promote to Production
@@ -138,6 +136,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Vercel Promote
         run: |
           yarn vercel promote ${{ needs.build-and-deploy.outputs.deployment-url }} \
