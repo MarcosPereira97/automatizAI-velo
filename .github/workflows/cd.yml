@@ -146,6 +146,4 @@ jobs:
 
       - name: Deploy to Production
         run: |
-          yarn vercel pull --yes --environment=production --token=${VERCEL_TOKEN} --scope=$VERCEL_SCOPE
-          yarn vercel build --prod --token=${VERCEL_TOKEN}
-          yarn vercel deploy --prebuilt --prod --token=${VERCEL_TOKEN} --scope=$VERCEL_SCOPE
+          yarn vercel deploy --prod --yes --token=${VERCEL_TOKEN} --scope=$VERCEL_SCOPE
