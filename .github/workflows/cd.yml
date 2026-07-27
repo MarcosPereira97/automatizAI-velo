@@ -120,7 +120,7 @@ jobs:
       - name: Run with TestDino report
         env:
           TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
-        run: npx playwright test
+        run: npx tdpw test -t ${{ secrets.TESTDINO_TOKEN }}
 
       # 7. Upload do Relatório do Playwright
       - name: Upload Playwright Report
