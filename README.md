@@ -1,21 +1,23 @@
-# Velô Sprint - Configurador de Veículo Elétrico
+# Velô Sprint - Configurador de Veículo Elétrico 🚗⚡
 
-Aplicação web em React para configuração e compra do veículo elétrico **Velô Sprint**.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=3ECF8E)
+![Playwright](https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white)
+![TestDino](https://img.shields.io/badge/TestDino_Reporter-Live_Stream-blue?style=for-the-badge)
+![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-## Sobre o Projeto
+Aplicação web moderna em React para configuração e compra do veículo elétrico premium **Velô Sprint**. Uma experiência fluida que demonstra as melhores práticas de desenvolvimento frontend, arquitetura em nuvem e automação de testes End-to-End.
 
-Uma SPA (Single Page Application) que permite:
+## 🚀 Sobre a Experiência no Projeto
 
-- Personalizar cores, rodas e opcionais do veículo
-- Calcular preços em tempo real
-- Realizar pedidos com análise de crédito
-- Consultar status de pedidos
+Este projeto vai além de um simples formulário de e-commerce. Ele implementa uma **arquitetura de nível de produção** com foco em testes robustos e isolamento de ambientes:
 
-**Especificações do Velô Sprint:** 450 km de autonomia | 0-100 km/h em 3.2s | 500 cv
+- **E2E Testing Moderno com Playwright & TestDino**: Automação de testes cobrindo todo o fluxo crítico de compras (seleção de opcionais, cálculo de financiamento, validação de crédito). Os resultados são transmitidos em tempo real para a dashboard do TestDino diretamente da pipeline, sem necessidade de esperar o job finalizar.
+- **Isolamento de Banco de Dados**: A infraestrutura CI/CD (GitHub Actions + Vercel) garante que os testes de Preview interajam com um banco Supabase isolado e descartável, evitando qualquer chance de poluição do banco de Produção.
+- **Deploy Multi-Environment**: Utilização de *Cloud Builds* distintos na Vercel para Produção e Preview, decodificando variáveis criptografadas (Sensíveis) com total segurança.
 
----
-
-## Stack Tecnológica
+## ⚙️ Stack Tecnológica
 
 | Categoria         | Tecnologias                                         |
 | ----------------- | --------------------------------------------------- |
@@ -24,139 +26,102 @@ Uma SPA (Single Page Application) que permite:
 | **Validação**     | Zod                                                 |
 | **Data Fetching** | TanStack Query                                      |
 | **Backend**       | Supabase (PostgreSQL + Edge Functions)              |
+| **Qualidade (QA)**| Playwright, @testdino/playwright reporter           |
 
 ---
 
-## Instalação
+## 🛠️ Instalação e Execução Local
 
 ```bash
 # Instalar dependências
-npm install
+yarn install
 
-# Rodar em desenvolvimento
-npm run dev
+# Rodar a aplicação em modo de desenvolvimento
+yarn dev
+
+# Rodar a suíte de testes E2E localmente
+yarn test:e2e
 ```
-
-Acesse: `http://localhost:8080`
+*Acesse a aplicação em: `http://localhost:5174`*
 
 ---
 
-## Configuração do Supabase
+## ☁️ Configuração do Supabase (Backend)
 
-### 1. Criar Projeto
+Este projeto utiliza o Supabase para gerenciar a base de dados relacional e a lógica de negócios através de Edge Functions.
 
-1. Acesse [supabase.com](https://supabase.com) e crie uma conta
-2. Clique em **New Project**
-3. Escolha um nome e senha para o banco
-4. Aguarde a criação (~2 minutos)
-
-### 2. Variáveis de Ambiente
-
-Crie o arquivo `.env` na raiz do projeto:
+### 1. Variáveis de Ambiente
+Crie o arquivo `.env` na raiz do projeto contendo as credenciais de Produção e Preview:
 
 ```env
-VITE_SUPABASE_PROJECT_ID="seu_project_id"
-VITE_SUPABASE_PUBLISHABLE_KEY="sua_chave_anon_publica"
-VITE_SUPABASE_URL="https://seu_project_id.supabase.co"
+# ========================================
+# SUPABASE - PRODUCTION
+# ========================================
+VITE_SUPABASE_PROJECT_ID="seu_project_id_prod"
+VITE_SUPABASE_PUBLISHABLE_KEY="sua_chave_anon_publica_prod"
+VITE_SUPABASE_URL="https://seu_project_id_prod.supabase.co"
+DATABASE_URL="sua_connection_string_prod"
+
+# ========================================
+# SUPABASE - PREVIEW (Para testes E2E isolados)
+# ========================================
+VITE_SUPABASE_PROJECT_ID="seu_project_id_preview"
+...
 ```
 
-> Encontre essas informações em: **Project Settings → API**
-
-### 3. Deploy (banco + functions)
+### 2. Migrations e Deploy
 
 ```bash
-# Instalar CLI
+# Instalar CLI do Supabase
 npm install -g supabase
 
-# Login e vincular projeto
+# Fazer login e vincular seu projeto
 supabase login
 supabase link --project-ref SEU_PROJECT_ID
 
-# Aplicar migrações (cria tabelas e RLS)
+# Aplicar o esquema do banco de dados (tabelas e RLS)
 supabase db push
 
-# Deploy das Edge Functions
+# Fazer o deploy das funções de Análise de Crédito
 supabase functions deploy
 ```
 
-Pronto! O banco e as functions estarão configurados.
-
 ---
 
-## Estrutura Principal
+## 🚗 O Veículo: Velô Sprint
 
-```
-src/
-├── pages/           # Páginas da aplicação
-├── components/      # Componentes React
-│   ├── configurator/   # Configurador do carro
-│   ├── landing/        # Landing page
-│   └── ui/             # Componentes shadcn/ui
-├── store/           # Estado global (Zustand)
-├── hooks/           # Hooks customizados
-└── integrations/    # Cliente Supabase
-```
-
----
-
-## Rotas
-
-| Rota         | Descrição               |
-| ------------ | ----------------------- |
-| `/`          | Landing page            |
-| `/configure` | Configurador do veículo |
-| `/order`     | Checkout/Pedido         |
-| `/success`   | Confirmação do pedido   |
-| `/lookup`    | Consulta de pedidos     |
-
----
-
-## Modelo de Preços
-
+- **Especificações:** 450 km de autonomia | 0-100 km/h em 3.2s | 500 cv
 - **Preço base:** R$ 40.000
 - **Rodas Sport:** +R$ 2.000
 - **Precision Park:** +R$ 5.500
 - **Flux Capacitor:** +R$ 5.000
-- **Financiamento:** 12x com juros de 2% a.m.
+- **Financiamento:** Até 12x com juros compostos de 2% a.m.
+
+### Motor de Análise de Crédito (Edge Function)
+A aplicação conta com uma regra de negócios no backend que analisa o crédito do cliente:
+| Score   | Resultado  | Condição Especial |
+| ------- | ---------- | ----------------- |
+| > 700   | Aprovado   | - |
+| 501-700 | Em análise | Aprova imediato se Entrada >= 50% |
+| ≤ 500   | Reprovado  | Aprova imediato se Entrada >= 50% |
 
 ---
 
-## Banco de Dados
+## 🏗️ Estrutura de Diretórios e Fluxo
 
-**Tabela `orders`** — campos principais:
+O projeto adota uma arquitetura limpa focada em componentes e separação de responsabilidades.
 
-- `order_number` — Formato: VLO-XXXXXX
-- `color`, `wheel_type`, `optionals` — Configuração
-- `customer_name`, `customer_email`, `customer_cpf` — Cliente
-- `payment_method`, `total_price` — Pagamento
-- `status` — pending, approved, rejected, analysis
-
----
-
-## Análise de Crédito
-
-| Score   | Resultado  |
-| ------- | ---------- |
-| > 700   | Aprovado   |
-| 501-700 | Em análise |
-| ≤ 500   | Reprovado  |
-
-_Se entrada ≥ 50% do total, aprova mesmo com score < 700_
-
----
-
-## Fluxo Principal
-
-```
-Landing → Configurador → Checkout → Análise de Crédito → Confirmação
+```text
+src/
+├── pages/           # Páginas principais da aplicação
+├── components/      # Componentes React
+│   ├── configurator/   # Módulo do configurador do carro
+│   ├── landing/        # Landing page
+│   └── ui/             # Componentes base (shadcn/ui)
+├── store/           # Gerenciamento de estado (Zustand)
+├── hooks/           # Custom hooks
+└── integrations/    # Clientes de API (Supabase)
 ```
 
----
-
-## Scripts
-
-```bash
-npm run dev      # Desenvolvimento
-npm run build    # Build de produção
-npm run lint     # Verificar código
-```
+**Fluxo do Usuário:**
+`Landing Page` → `Configurador 3D` → `Checkout Seguro` → `Análise de Crédito em Tempo Real` → `Confirmação/Recibo`
