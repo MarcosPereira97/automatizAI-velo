@@ -122,6 +122,7 @@ jobs:
           TESTDINO_TOKEN: ${{ secrets.TESTDINO_TOKEN }}
           BASE_URL: ${{ needs.build-and-deploy.outputs.deployment-url }}
           DATABASE_URL: ${{ secrets.DATABASE_URL_PREVIEW }}
+          KAFKAJS_LOG_LEVEL: nothing
         run: npx playwright test
 
   promote:
